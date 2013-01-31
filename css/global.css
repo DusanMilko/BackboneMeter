@@ -3,6 +3,7 @@ ul { margin: 0px; list-style: none;}
 .hid { display: none;}
 .texthid a { display: none;}
 a { color: #015486; -webkit-tap-highlight-color: rgba(255, 255, 255, 0);}
+a:hover { color: #015486;}
 
 .red { background: #D15D5D!important;}
 .green { background: #7CAF2F!important;}
@@ -73,6 +74,8 @@ border-bottom: 36px solid transparent;
 .nav li:nth-child(2) .arrow-right { border-left-color: #bbb;}
 .nav li:nth-child(3) .arrow-right { border-left-color: #ccc;}
 .nav li:nth-child(4) .arrow-right { border-left-color: #ddd;}
+
+.nav li.meter .arrow-right{ display: none;}
 /*
 .nav li.aa { background: #aaa;} .nav li.bb { background: #bbb;}
 .nav li.cc { background: #ccc;} .nav li.dd { background: #ddd;}
