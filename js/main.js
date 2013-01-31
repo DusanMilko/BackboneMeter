@@ -24,15 +24,18 @@ App.Models.LoginStatus = Backbone.Model.extend({
         this.set({'loggedIn': localStorage.getItem('loggedIn')});
         this.set({'username': localStorage.getItem('username')});
         this.set({'pass': localStorage.getItem('pass')}); 
-	this.set({'utils': localStorage.getItem('utils')});
+	    this.set({'utils': localStorage.getItem('utils')});
         
         var self = this;
-	this.fetch({ 
+		if( this.get('username') != '' && this.get('username') != null ){
+				  this.fetch({ 
                     data: $.param({ nm: this.get('username'), ps: this.get('pass') }) 
                   }).complete(function(){
                     self.userValidate(self);
                   });
-        
+        }else{
+			//self.userValidate(self);
+		}
         
     },
 
@@ -47,9 +50,7 @@ App.Models.LoginStatus = Backbone.Model.extend({
         
         //this.fetch({ data: $.param({ nm: username, ps: pass}) })
         
-        this.fetch({ data: $.param({ nm: username, ps: pass }), success: function() {
-                
-        }});
+        this.fetch({ data: $.param({ nm: username, ps: pass }), success: function() { }});
         
     },
 	
@@ -101,7 +102,7 @@ App.Views.AppView = Backbone.View.extend({
         e.preventDefault();
         localStorage.clear();
         this.model.clearLogin();
-	appi.navigate('', true);	
+	    appi.navigate('', true);	
     },
     
     changeutil: function(e){
@@ -144,10 +145,11 @@ App.Views.AppView = Backbone.View.extend({
                 el.set('selected', '');
             });
         
-            var ind = 0;
+            var ind = -1;
         
             if( this.model.get('page') == 'campus' ){
                 this.nav.collection.at(0).set('selected', 'selected');
+				ind = 0;
             }
             else if( this.model.get('page').indexOf('utils/') !== -1 ){
                 ind = 1;
@@ -161,10 +163,12 @@ App.Views.AppView = Backbone.View.extend({
                 ind = 3;
                 this.nav.collection.at(3).set('selected', 'selected');   
             }
-            
+			
+			if( ind >= 0 ){
             $('h1').html( 
                 '<img src="imgs/meter.png" />'+
                 this.nav.collection.at(ind).attributes.title );
+			}
             
             this.nav.render();
             
@@ -716,7 +720,7 @@ App.Router = Backbone.Router.extend({
 });
 var appi = new App.Router;
 this.appi = appi;
-
+appi.app.render();
 Backbone.history.start();
 
 })();

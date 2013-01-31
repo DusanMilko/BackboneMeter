@@ -3,7 +3,7 @@ ul { margin: 0px; list-style: none;}
 .hid { display: none;}
 .texthid a { display: none;}
 a { color: #015486; -webkit-tap-highlight-color: rgba(255, 255, 255, 0);}
-a:active { color: #000;}
+
 .red { background: #D15D5D!important;}
 .green { background: #7CAF2F!important;}
 
