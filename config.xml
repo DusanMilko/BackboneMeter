@@ -15,8 +15,7 @@
 	
 	
 	<preference name="fullscreen" value="true" />
-	<preference name="auto-hide-splash-screen" value="false" />
-	<preference name="show-splash-screen-spinner" value="true" />
+	<preference name="splash-screen-duration" value="100" />
 
 	
 	<icon src="icon.png" />
