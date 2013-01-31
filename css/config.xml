@@ -3,7 +3,7 @@
 	xmlns:gap = "http://phonegap.com/ns/1.0"
 	id        = "com.phonegap.backbonepwmeter"
 	versionCode="10" 
-	version   = "0.0.1">
+	version   = "0.0.2">
 
     <!-- versionCode is optional and Android only -->
 
@@ -15,9 +15,9 @@
 	
 	
 	<preference name="fullscreen" value="true" />
-	<preference name="auto-hide-splash-screen" value="true" />
-	<preference name="show-splash-screen-spinner" value="false" />
-	<preference name="splash-screen-duration" value="0000" />
+	<preference name="auto-hide-splash-screen" value="false" />
+	<preference name="show-splash-screen-spinner" value="true" />
+
 	
 	<icon src="icon.png" />
 	
