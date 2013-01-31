@@ -1,0 +1,31 @@
+small {
+  margin:0 10px 30px;
+  display:block;
+  font-size:12px;
+}
+.prevReads a {
+  font-size:12px;
+  margin: 0 1% 14px 1%;
+  font-size: 12px;
+  color: white;
+  float: left;
+  text-decoration: none;
+  text-align: center;
+}
+.prevReads a:hover { background: #015486;}
+.swipe {
+  padding-bottom: 7px;
+  position:relative;
+  z-index:1;
+  -webkit-perspective: 1000;
+  -webkit-backface-visibility: hidden;
+}
+.swipe li div, .swipe div div div {
+  margin:0 0px;
+  padding:28px 0px;
+  background:#015486;
+  font-weight:bold;
+  color:#fff;
+  font-size:20px;
+  text-align:center;
+}

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        
+        <!-- CSS, 1.resets(don't edit) 2.general styles(can edit) -->
+        <link rel="stylesheet" href="css/screen.css" type="text/css" media="screen" />
+        <link rel="stylesheet" href="css/global.css" type="text/css" media="screen" />
+        
+        <link href="css/mobiscroll-2.2.custom.min.css" rel="stylesheet" type="text/css" />
+        <style>
+            /* Font */
+            @font-face
+            {
+            font-family: Lato;
+            src: url('css/Lato-Light.ttf')/*,
+                 url('Sansation_Light.eot')*/; /* IE9+ */
+            }
+            body {
+                background: #eee!important;
+            }
+            .sett {
+                margin-top: -15px;
+                position: static;
+            }
+        </style>
+	<title>Propworks Meter</title>
+</head>
+<body>
+
+<script src="js/underscore.js"></script>
+<script src="js/jquery.js"></script>
+<script src="js/backbone.js"></script>
+<script src="js/mobiscroll-2.2.custom.min.js" type="text/javascript"></script>
+<script src='js/swipe.js'></script>
+
+<script id="nav_view" type="text/html">
+    <a href="#<%= escape('page') %>"><div class="arrow-right"></div><span><%= escape('loc') %></span></a>
+</script>
+<script id="campus_view" type="text/html">
+    <% if( appi.app.model.attributes.utils == "utils" ) { %>
+        <a href="#meters/<%= escape('name') %>"> 
+    <% }else{ %>
+        <a href="#utils/<%= escape('name') %>"> 
+    <% } %>
+        <span class="code"><%= escape('name') %></span>
+        <span class="descr"><%= escape('desc') %></span>
+    </a>     
+</script>
+<script id="utils_view" type="text/html">
+    <a href="#meters/<%= escape('campus') %>/<%= escape('name') %>">                     
+        <span class="code"><%= escape('name') %></span>
+        <span class="descr"><%= escape('desc') %></span>
+    </a>     
+</script>
+<script id="meters_view" type="text/html">
+    <a href="#meter/<%= escape('campus') %>/<%= escape('name') %>">                     
+        <span class="code"><%= escape('name') %></span>
+        <span class="descr"><%= escape('desc') %></span>
+    </a>     
+</script>
+<script id="meter_view" type="text/html">
+    
+    <form class="meterInput">
+        <div id="result" ></div> 
+
+        <div class="date">
+            <label for="date">Choose Read Date</label> 
+            <input id="scroller" class="hid" name="scroller" value="2013-01-28" />
+        </div>
+        <div class="iCont"> 
+            <label for="readingT">Reading Type</label> 
+            <select name="readT" id="readT">
+                <option value="R">Regular</option>
+                <option value="U">Usage</option>
+                <option value="F">Final</option>
+                <option value="E">Estimated</option>
+                <option value="I">Initial</option>
+            </select> 
+        </div>
+        <div class="iCont"> 
+            <label for="reading">Reading</label> 
+            <input type="number" name="readingR" id="readingR" class="readingInput" value="0"  />
+            <input type="number" name="readingU" id="readingU" class="readingInput" value="0"  /> 
+            <input type="number" name="readingF" id="readingF" class="readingInput" value="0"  /> 
+            <input type="number" name="readingE" id="readingE" class="readingInput" value="0"  /> 
+            <input type="number" name="readingI" id="readingI" class="readingInput" value="0"  /> 
+        </div>
+        <input type="submit" id="sendM" value="ADD READING" name="submit" />
+    </form>
+    <script>
+        
+    //var slider3 = new Swipe(document.getElementById('slider3'));
+    </script>
+</script>
+<script id="logged_in" type="text/html">
+    <div id="settings_cont" class="hid">
+        <div id="settings">
+            <a class="logout" href="#">logout</a>
+            <span class="changeutil" >util 
+            <% if( appi.app.model.attributes.utils == "utils" ) { %>
+                off
+            <% }else{ %>
+                on
+            <% } %>
+            </span>
+        </div>
+    </div>
+    <div id="main_cont" class="extend">
+        <div class="content" >
+            <h1><img src="imgs/meter.png" />Select a Campus</h1>
+            <span class="sett" >settings</span>
+            
+            <div class="nav_cont">
+            
+            </div>
+            <div class="loader"><img src="imgs/loader.gif" /></div>
+            <div class="campus_cont">
+            
+            </div>
+        </div>
+    </div>
+</script>
+<script id="not_logged_in" type="text/html">
+    <div id="main_cont">        
+        <form id="login" class="login">
+            <!-- Logo -->
+            <img src="imgs/airitlogo-TINY.png" />
+            <!-- Title -->
+            <h1>PROPworks - Meter Sign In</h1>
+            <div>
+                    <label for="username">Username</label> 
+                    <input type="text" name="username" id="username" value="" /> 
+            <!--Username: <input name="username" type="text" value="" />-->
+            </div>
+            <div class="passinput" >
+                    <label for="pass">Password</label> 
+                    <input type="password" name="pass" id="pass" value="" /> 
+            <!--Password: <input name="pass" type="text" value="" />-->
+            </div>
+            <!--<button id="send" value="Log In" type="submit">Submit</button>-->
+            <input type="submit" id="send" value="Log In" name="submit" />
+        </form>
+    </div>
+    <script>
+    $(document).ready(function(){
+
+        //Input replace and initialize styles
+        $("form label").css("display","block");
+        $("form label").stop().animate({"opacity": "1"}, 600);
+        $("form input").focus(function () {
+                        $(this).siblings("label").stop().animate({"opacity": "0"}, 400);
+                        $(this).siblings("label").css("display","none");
+        });
+        $("form input").blur(function() {
+                        if( $(this).val() == "" ){
+                            $(this).siblings("label").stop().animate({"opacity": "1"}, 400);
+                            $(this).siblings("label").css("display","block");
+                        }
+        });
+        $("form div input").val("");
+
+    });
+    </script>
+</script>
+
+<script src="js/main.js"></script>
+
+</body>
+</html>
