@@ -94,7 +94,7 @@ App.Views.AppView = Backbone.View.extend({
         'submit .login': 'onLoginSubmit',
 	    'click a.logout': 'logout',
         'click .changeutil': 'changeutil',
-        'click .sett': 'sett'
+        'tap .sett': 'sett'
     },
 	
     logout: function(e){

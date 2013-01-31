@@ -3,7 +3,7 @@ ul { margin: 0px; list-style: none;}
 .hid { display: none;}
 .texthid a { display: none;}
 a { color: #015486; -webkit-tap-highlight-color: rgba(255, 255, 255, 0);}
-a:hover { color: #000;}
+a:active { color: #000;}
 .red { background: #D15D5D!important;}
 .green { background: #7CAF2F!important;}
 
@@ -16,7 +16,7 @@ background-size: cover;}*/
 #main_cont.extend { max-width: 560px; margin-top: 20px;}
 
 /* Login style */
-.tabn a:hover { color: #fff;}
+.tabn a:active { color: #fff;}
 h1 { float:left; text-align: center; color: #222; margin-bottom: 20px; font-family: 'Lato', sans-serif; font-weight:300; margin-left: 0px; width: 100%; font-size: 30px;}
 h1 img { margin-top: 3px; vertical-align:text-top;}
 
@@ -28,7 +28,7 @@ h1 img { margin-top: 3px; vertical-align:text-top;}
 #login input { color: #444; font-size: 14px; float: left; outline: none; border: none; background: #ccc; width: 96%; height: 20px; border-left: 10px solid #7f354a; padding: 15px 0px 15px 4%; margin: 0px 0px 0px 0px; -webkit-focus-ring-color: none!important; -webkit-appearance: none!important;-webkit-box-flex: 1; -webkit-box-shadow: none; -webkit-border-radius: 0;-webkit-tap-highlight-color: rgba(255, 255, 255, 0); }
 #login input:focus { border-left: 10px solid #015486; -webkit-focus-ring-color: none!important; -webkit-appearance: none!important;-webkit-box-flex: 1; -webkit-box-shadow: none; -webkit-border-radius: 0;-webkit-tap-highlight-color: rgba(255, 255, 255, 0); }
 #login input#send { margin-top: 10px; border: none; width: 100%; float: left; background: #7f354a; color: #fff; cursor: pointer; font-weight: bold; padding: 10px 20px; height: 50px;}
-#login input#send:hover { border: none; background: #015486;}
+#login input#send:active { border: none; background: #015486;}
 #login div#result { margin: 5px auto 1px; }
 #login div.response { margin: 3px 0% 0px; background: #bda100; width: 94%; padding: 8px 3% 8px;
 text-align: center;  font-size: 15px;}
@@ -39,7 +39,7 @@ text-align: center;  font-size: 15px;}
 /* Logout button style */
 .logout { width: 60px; height: 30px; float: right; position: absolute; top: 20px; background: #cbcbcb;
 text-align: center; text-decoration: none; padding-top: 15px; margin-left: -60px; color: #7f354a;}
-a.logout:hover { color: #015486; background: #bbb; }
+a.logout:active { color: #015486; background: #bbb; }
 
 /* General content */
 .content { background: #eee; padding: 15px 3% 15px; float: left; width: 94%; }
@@ -83,10 +83,10 @@ border-bottom: 36px solid transparent;
 /* Bread crumb states */
 .nav li.selected { color: #eee; width: 25%; margin: 0px 0px 0px 0px; background: #7f354a;}
 .nav li.selected a { color: #eee; border-color: #7f354a; }
-.nav li:hover a  { color: #eee; border-color: #d3be4f; background: #d3be4f!important; height: 100%;}
+.nav li:active a  { color: #eee; border-color: #d3be4f; background: #d3be4f!important; height: 100%;}
 .nav li.selected .arrow-right {border-left: 10px solid #7f354a;}
-.nav li:hover .arrow-right {border-left: 10px solid #d3be4f;}
-.nav li.last:hover a { width: 101%;}
+.nav li:active .arrow-right {border-left: 10px solid #d3be4f;}
+.nav li.last:active a { width: 101%;}
 
 .nav.utils li { width: 33%;}
 .nav.utils li.selected { width: 34%;}
@@ -96,11 +96,11 @@ border-bottom: 36px solid transparent;
 .campus_list li a { width: 100%; padding: 0px 0%; float: left;
 background: #cecece; border-top: 1px solid #e6e6e6; text-decoration: none;
 border-bottom: 1px solid #919191;}
-.campus_list li a:hover { color: #7F354A; background: #888;
+.campus_list li a:active { color: #7F354A; background: #888;
 border-bottom-color: #ccc;
 border-top-color: #666;
 }
-.campus_list li a:hover .descr { color: #d3be4f;}
+.campus_list li a:active .descr { color: #d3be4f;}
 .campus_list li.red a { background: #D15D5D!important;}
 .campus_list li.red a span.code { background: #FFA3A3!important;}
 
@@ -130,7 +130,7 @@ margin: 0px 0px 0px 0px;
 .meterInput input#send, .meterInput input#sendM { margin-top: 10px; border: none; width: 100%; 
 float: left; background: #7f354a; color: #fff; cursor: pointer; 
 font-weight: bold; padding: 10px 20px; height: 50px;}
-.meterInput input#send:hover, .meterInput input#sendM:hover { border: none; background: #015486;}
+.meterInput input#send:active, .meterInput input#sendM:active { border: none; background: #015486;}
 .meterInput label { width: 24%; font-size: 14px; cursor: text; float: left; color: #444;
 background: #CCC; padding: 16px 0px 13px 2%;}
 .meterInput div { clear: both; overflow: hidden; width: 100%; float: left; margin: 0px 0px 0px 0px;}
@@ -146,7 +146,7 @@ margin: 0px; padding: 10px 2%;
 .loader { width: 100%; text-align: center; float: left; margin: 30px 0px 10px;}
 .changeutil, .sett { cursor: pointer; width: 60px; height: 30px; float: right; position: absolute; top: 20px; background: #cbcbcb;
 text-align: center; text-decoration: none; padding-top: 15px; margin-left: -60px; color: #7f354a;}
-.changeutil:hover, .sett:hover { color: #015486; background: #bbb; }
+.changeutil:active, .sett:active { color: #015486; background: #bbb; }
 
 #settings_cont { width: 100%; height: 85px; background: #222; border-bottom: 1px solid #000; }
 #settings { width: 100%; margin: 0px auto;}
