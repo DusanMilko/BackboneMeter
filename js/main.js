@@ -25,7 +25,7 @@ App.Models.LoginStatus = Backbone.Model.extend({
         this.set({'loggedIn': localStorage.getItem('loggedIn')});
         this.set({'username': localStorage.getItem('username')});
         this.set({'pass': localStorage.getItem('pass')}); 
-	this.set({'utils': localStorage.getItem('utils')});
+	    this.set({'utils': localStorage.getItem('utils')});
         
         var self = this;
 	/*this.fetch({ 
@@ -47,7 +47,7 @@ App.Models.LoginStatus = Backbone.Model.extend({
             }else{
                 if( this.get('loggedIn') == "true" ){
                     console.log('ppp');
-                    //this.set({'offline': 'on' });
+                    this.set({'offline': 'on' });
                 }
             }
        }else{
@@ -78,7 +78,7 @@ App.Models.LoginStatus = Backbone.Model.extend({
             if( this.get('loggedIn') == "true" ){
                 
                 //Login from OFFLINE ADD HERE
-                       
+                self.set({'offline': 'on'});       
             }
             
             this.set({'loggedIn': 'false' });
@@ -139,31 +139,32 @@ App.Views.AppView = Backbone.View.extend({
     },
     
     offlineInit: function(){
-        
-        console.log('woof');
-        var campusoffline = JSON.parse(localStorage.getItem('campusStorage'));
-        for( var i = 0; i < campusoffline.length; i++ ){
-            this.campus.collection.models[i] = new App.Models.campus();
-            this.campus.collection.models[i].attributes = campusoffline[i];
-        }
-        this.campus.collection.length = this.campus.collection.models.length;
-        
-        var utilsoffline = JSON.parse(localStorage.getItem('utilsStorage'));
-        for( var i = 0; i < utilsoffline.length; i++ ){
-            this.utils.collection.models[i] = new App.Models.utils();
-            this.utils.collection.models[i].attributes = utilsoffline[i];
-        }
-        this.utils.collection.length = this.utils.collection.models.length;
-        
-        var metersoffline = JSON.parse(localStorage.getItem('metersStorage'));
-        for( var i = 0; i < metersoffline.length; i++ ){
-            this.meters.collection.models[i] = new App.Models.meters();
-            this.meters.collection.models[i].attributes = metersoffline[i];
-        }
-        this.meters.collection.length = this.meters.collection.models.length;
-        
-        this.campus.render();
-        $('.loader').addClass('hid');
+        if( JSON.parse(localStorage.getItem('campusStorage')) ){
+			console.log('woof');
+			var campusoffline = JSON.parse(localStorage.getItem('campusStorage'));
+			for( var i = 0; i < campusoffline.length; i++ ){
+				this.campus.collection.models[i] = new App.Models.campus();
+				this.campus.collection.models[i].attributes = campusoffline[i];
+			}
+			this.campus.collection.length = this.campus.collection.models.length;
+			
+			var utilsoffline = JSON.parse(localStorage.getItem('utilsStorage'));
+			for( var i = 0; i < utilsoffline.length; i++ ){
+				this.utils.collection.models[i] = new App.Models.utils();
+				this.utils.collection.models[i].attributes = utilsoffline[i];
+			}
+			this.utils.collection.length = this.utils.collection.models.length;
+			
+			var metersoffline = JSON.parse(localStorage.getItem('metersStorage'));
+			for( var i = 0; i < metersoffline.length; i++ ){
+				this.meters.collection.models[i] = new App.Models.meters();
+				this.meters.collection.models[i].attributes = metersoffline[i];
+			}
+			this.meters.collection.length = this.meters.collection.models.length;
+			
+			this.campus.render();
+			$('.loader').addClass('hid');
+		}
         
     },
 	
@@ -235,7 +236,7 @@ App.Views.AppView = Backbone.View.extend({
             
             if( ind >= 0 ){
                 $('h1').html( 
-                '<img src="../apk/imgs/meter.png" />'+
+                '<img src="imgs/meter.png" />'+
                 this.nav.collection.at(ind).attributes.title );
             }
             
@@ -329,7 +330,7 @@ App.Collections.campusColl = Backbone.Collection.extend({
                 
                 var campusStorage = JSON.stringify(self.toJSON());
                 localStorage.setItem( 'campusStorage', campusStorage );
-                console.log( JSON.parse(localStorage.getItem('campusStorage')) );
+                //console.log( JSON.parse(localStorage.getItem('campusStorage')) );
                 
                 //appi.app.campus.collection.models = JSON.parse(localStorage.getItem('campusStorage'));
                 
