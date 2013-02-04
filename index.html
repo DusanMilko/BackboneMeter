@@ -36,12 +36,6 @@
     }
 
     function onDeviceReady() {
-		document.addEventListener("resume", onResume, false);
-		document.addEventListener("online", onOnline, false);
-        document.addEventListener("offline", onOffline, false);
-    }
-	
-	function onResume() {
 		document.addEventListener("online", onOnline, false);
         document.addEventListener("offline", onOffline, false);
     }
