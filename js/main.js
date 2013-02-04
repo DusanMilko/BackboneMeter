@@ -28,11 +28,9 @@ App.Models.LoginStatus = Backbone.Model.extend({
         
         var self = this;
 		if( this.get('username') != '' && this.get('username') != null ){
-				  $('.loaderLogin').removeClass('hid');
 				  this.fetch({ 
                     data: $.param({ nm: this.get('username'), ps: this.get('pass') }) 
                   }).complete(function(){
-				    $('.loaderLogin').addClass('hid');
                     self.userValidate(self);
                   });
 			alert('on ether '+ether);
@@ -56,7 +54,13 @@ App.Models.LoginStatus = Backbone.Model.extend({
         
         //this.fetch({ data: $.param({ nm: username, ps: pass}) })
         
-        this.fetch({ data: $.param({ nm: username, ps: pass }), success: function() { }});
+        //this.fetch({ data: $.param({ nm: username, ps: pass }), success: function() { }});
+		$('.loaderLogin').removeClass('hid');
+        this.fetch({ 
+            data: $.param({ nm: username, ps: pass }) 
+        }).complete(function(){
+            $('.loaderLogin').addClass('hid');
+        });
         
     },
 	
