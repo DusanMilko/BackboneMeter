@@ -37,16 +37,13 @@
 
     function onDeviceReady() {
 		document.addEventListener("resume", onResume, false);
-		internetCheck();
-    }
-	
-	function internetCheck() {
 		document.addEventListener("online", onOnline, false);
         document.addEventListener("offline", onOffline, false);
-	}
+    }
 	
 	function onResume() {
-		internetCheck();
+		document.addEventListener("online", onOnline, false);
+        document.addEventListener("offline", onOffline, false);
     }
 	
 	function onOnline() {
