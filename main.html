@@ -30,13 +30,14 @@
 	
 <script type="text/javascript" charset="utf-8" src="cordova-2.2.0.js"></script>
 <script type="text/javascript" charset="utf-8">
-
+	
+	var ether = -1;
+	
     function onLoad() {
         document.addEventListener("deviceready", onDeviceReady, false);
     }
 
     function onDeviceReady() {
-		var ether = -1;
 		document.addEventListener("online", onOnline, false);
         document.addEventListener("offline", onOffline, false);
     }
