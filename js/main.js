@@ -38,7 +38,7 @@ App.Models.LoginStatus = Backbone.Model.extend({
        //var ether = 1;
        
        if( this.get('username') != '' && this.get('username') != null ){ 
-            if( ether == 1 ){
+            if( ether > 0 ){
                 this.fetch({ 
                     data: $.param({ nm: this.get('username'), ps: this.get('pass') }) 
                 }).complete(function(){

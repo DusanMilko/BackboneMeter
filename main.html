@@ -31,11 +31,11 @@
 <script type="text/javascript" charset="utf-8" src="cordova-2.2.0.js"></script>
 <script type="text/javascript" charset="utf-8">
 	
-	var ether = -1;
+	var ether = 0;
 	
-    function onLoad() {
-        document.addEventListener("deviceready", onDeviceReady, false);
-    }
+    //function onLoad() {
+       document.addEventListener("deviceready", onDeviceReady, false);
+    //}
 
     function onDeviceReady() {
 		document.addEventListener("online", onOnline, false);
@@ -55,7 +55,7 @@
 </script>
 	
 </head>
-<body onload="onLoad()">
+<body>
 
 <script src="js/underscore.js"></script>
 <script src="js/jquery.js"></script>
