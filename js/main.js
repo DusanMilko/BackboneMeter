@@ -4,7 +4,7 @@ window.App = {
 	Models: {},
 	Collections: {},
 	Views: {},
-        Vars: {},
+    Vars: {},
 	Router: {}
 };
 
@@ -27,14 +27,16 @@ App.Models.LoginStatus = Backbone.Model.extend({
 	    this.set({'utils': localStorage.getItem('utils')});
         
         var self = this;
-		if( this.get('username') != '' && this.get('username') != null && ether != 0 ){
-				  this.fetch({ 
+		if( this.get('username') != '' && this.get('username') != null && ether > 0 ){
+				/*  this.fetch({ 
                     data: $.param({ nm: this.get('username'), ps: this.get('pass') }) 
                   }).complete(function(){
                     self.userValidate(self);
-                  });
+                  });*/
         }else{
 			//self.userValidate(self);
+			localStorage.setItem('loggedIn', 'false')
+            this.set({'loggedIn': 'false' });
 			alert('ether '+ether);
 		}
         
@@ -722,6 +724,7 @@ App.Router = Backbone.Router.extend({
 var appi = new App.Router;
 this.appi = appi;
 appi.app.render();
+
 Backbone.history.start();
 
 })();
