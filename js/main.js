@@ -724,6 +724,7 @@ App.Router = Backbone.Router.extend({
 });
 var appi = new App.Router;
 this.appi = appi;
+
 appi.app.render();
 
 Backbone.history.start();
