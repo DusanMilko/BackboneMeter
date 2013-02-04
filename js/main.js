@@ -27,7 +27,7 @@ App.Models.LoginStatus = Backbone.Model.extend({
 	    this.set({'utils': localStorage.getItem('utils')});
         
         var self = this;
-		if( this.get('username') != '' && this.get('username') != null ){
+		if( this.get('username') != '' && this.get('username') != null && ether != 0 ){
 				  this.fetch({ 
                     data: $.param({ nm: this.get('username'), ps: this.get('pass') }) 
                   }).complete(function(){
@@ -35,6 +35,7 @@ App.Models.LoginStatus = Backbone.Model.extend({
                   });
         }else{
 			//self.userValidate(self);
+			alert('ether '+ether);
 		}
         
     },
