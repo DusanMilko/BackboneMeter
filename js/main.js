@@ -4,7 +4,7 @@ window.App = {
 	Models: {},
 	Collections: {},
 	Views: {},
-    Vars: {},
+        Vars: {},
 	Router: {}
 };
 
@@ -16,6 +16,7 @@ App.Models.LoginStatus = Backbone.Model.extend({
         pass: '',
         page: 'campus',
         valid: 'false',
+        offline: 'off',
         utils: 'utils'
     },
 
@@ -24,22 +25,35 @@ App.Models.LoginStatus = Backbone.Model.extend({
         this.set({'loggedIn': localStorage.getItem('loggedIn')});
         this.set({'username': localStorage.getItem('username')});
         this.set({'pass': localStorage.getItem('pass')}); 
-	    this.set({'utils': localStorage.getItem('utils')});
+	this.set({'utils': localStorage.getItem('utils')});
         
         var self = this;
-		if( this.get('username') != '' && this.get('username') != null ){
-				  this.fetch({ 
+	/*this.fetch({ 
                     data: $.param({ nm: this.get('username'), ps: this.get('pass') }) 
                   }).complete(function(){
                     self.userValidate(self);
                   });
-			alert('on ether '+ether);
-        }else{
-			//self.userValidate(self);
-			localStorage.setItem('loggedIn', 'false')
+        */
+       
+       //var ether = 1;
+       
+       if( this.get('username') != '' && this.get('username') != null ){ 
+            if( ether == 1 ){
+                this.fetch({ 
+                    data: $.param({ nm: this.get('username'), ps: this.get('pass') }) 
+                }).complete(function(){
+                    self.userValidate(self);
+                });
+            }else{
+                if( this.get('loggedIn') == "true" ){
+                    console.log('ppp');
+                    //this.set({'offline': 'on' });
+                }
+            }
+       }else{
+            localStorage.setItem('loggedIn', 'false')
             this.set({'loggedIn': 'false' });
-			alert('off ether '+ether);
-		}
+       }
         
     },
 
@@ -53,19 +67,27 @@ App.Models.LoginStatus = Backbone.Model.extend({
         var self = this;
         
         //this.fetch({ data: $.param({ nm: username, ps: pass}) })
-        
-        //this.fetch({ data: $.param({ nm: username, ps: pass }), success: function() { }});
-		$('.loaderLogin').removeClass('hid');
+        $('.loaderLogin').removeClass('hid');
         this.fetch({ 
             data: $.param({ nm: username, ps: pass }) 
         }).complete(function(){
-			$('.response').removeClass('hid');
+            //self.userValidate(self);
+            $('.response').removeClass('hid');
             $('.loaderLogin').addClass('hid');
-			this.set({'loggedIn': 'false' });
+            
+            if( this.get('loggedIn') == "true" ){
+                
+                //Login from OFFLINE ADD HERE
+                       
+            }
+            
+            this.set({'loggedIn': 'false' });
         });
-        
+        /*this.fetch({ data: $.param({ nm: username, ps: pass }), success: function() {
+                $('.loaderLogin').addClass('hid');
+        }});*/
     },
-	
+    	
     userValidate: function( username, pass ) {
         if( this.get('valid') == "Success" ){
             localStorage.setItem('loggedIn', 'true')
@@ -100,21 +122,56 @@ App.Views.AppView = Backbone.View.extend({
         //this.model.bind('change:loggedIn', this.render, this);
         this.model.bind('change:valid', this.render, this);
         this.model.bind('change:page', this.renderNav, this);
-        
+        this.model.bind('change:offline', this.offlineInit, this);
     },
 
     events: {
         'submit .login': 'onLoginSubmit',
-	    'click a.logout': 'logout',
+	'click a.logout': 'logout',
         'click .changeutil': 'changeutil',
-        'click .sett': 'sett'
+        'click .sett': 'sett',
+        'click .offline': 'offline'
+    },
+    
+    offline: function(){
+        console.log('meow');
+        this.model.set({'offline': 'on'});
+    },
+    
+    offlineInit: function(){
+        
+        console.log('woof');
+        var campusoffline = JSON.parse(localStorage.getItem('campusStorage'));
+        for( var i = 0; i < campusoffline.length; i++ ){
+            this.campus.collection.models[i] = new App.Models.campus();
+            this.campus.collection.models[i].attributes = campusoffline[i];
+        }
+        this.campus.collection.length = this.campus.collection.models.length;
+        
+        var utilsoffline = JSON.parse(localStorage.getItem('utilsStorage'));
+        for( var i = 0; i < utilsoffline.length; i++ ){
+            this.utils.collection.models[i] = new App.Models.utils();
+            this.utils.collection.models[i].attributes = utilsoffline[i];
+        }
+        this.utils.collection.length = this.utils.collection.models.length;
+        
+        var metersoffline = JSON.parse(localStorage.getItem('metersStorage'));
+        for( var i = 0; i < metersoffline.length; i++ ){
+            this.meters.collection.models[i] = new App.Models.meters();
+            this.meters.collection.models[i].attributes = metersoffline[i];
+        }
+        this.meters.collection.length = this.meters.collection.models.length;
+        
+        this.campus.render();
+        $('.loader').addClass('hid');
+        
     },
 	
     logout: function(e){
         e.preventDefault();
         localStorage.clear();
         this.model.clearLogin();
-	    appi.navigate('', true);	
+	appi.navigate('', true);	
     },
     
     changeutil: function(e){
@@ -161,7 +218,7 @@ App.Views.AppView = Backbone.View.extend({
         
             if( this.model.get('page') == 'campus' ){
                 this.nav.collection.at(0).set('selected', 'selected');
-				ind = 0;
+                ind = 0;
             }
             else if( this.model.get('page').indexOf('utils/') !== -1 ){
                 ind = 1;
@@ -175,12 +232,12 @@ App.Views.AppView = Backbone.View.extend({
                 ind = 3;
                 this.nav.collection.at(3).set('selected', 'selected');   
             }
-			
-			if( ind >= 0 ){
-            $('h1').html( 
-                '<img src="imgs/meter.png" />'+
+            
+            if( ind >= 0 ){
+                $('h1').html( 
+                '<img src="../apk/imgs/meter.png" />'+
                 this.nav.collection.at(ind).attributes.title );
-			}
+            }
             
             this.nav.render();
             
@@ -266,8 +323,16 @@ App.Collections.campusColl = Backbone.Collection.extend({
     
     getColl: function( user, pass ) {
         //this.fetch({ data: $.param({ nm: user, ps: pass }) });
+        var self = this;
         this.fetch({ data: $.param({ nm: user, ps: pass }), success: function() {
                 u.getColl( user, pass, 'EXE' );
+                
+                var campusStorage = JSON.stringify(self.toJSON());
+                localStorage.setItem( 'campusStorage', campusStorage );
+                console.log( JSON.parse(localStorage.getItem('campusStorage')) );
+                
+                //appi.app.campus.collection.models = JSON.parse(localStorage.getItem('campusStorage'));
+                
                 //w.getColl( user, pass, 'EXE' );
         }});
         
@@ -351,8 +416,11 @@ App.Collections.utilsColl = Backbone.Collection.extend({
     
     getColl: function( user, pass ) {
         //this.fetch({ data: $.param({ nm: user, ps: pass }) });
+        var self = this;
         this.fetch({ data: $.param({ nm: user, ps: pass }), success: function() {
                 w.getColl( user, pass, 'EXE' );
+                var utilsStorage = JSON.stringify(self.toJSON());
+                localStorage.setItem( 'utilsStorage', utilsStorage );
         }});
         
     },
@@ -506,7 +574,10 @@ App.Collections.metersColl = Backbone.Collection.extend({
     
     getColl: function( user, pass, camp ) {
         //this.fetch({ data: $.param({ nm: user, ps: pass, camp: camp }) });
+        var self = this;
         this.fetch({ data: $.param({ nm: user, ps: pass, camp: camp }), success: function() {
+                var metersStorage = JSON.stringify(self.toJSON());
+                localStorage.setItem( 'metersStorage', metersStorage );
                 appi.app.renderView();
                 $('.loader').addClass('hid');
         }});
