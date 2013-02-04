@@ -27,8 +27,30 @@
             }
         </style>
 	<title>Propworks Meter</title>
+	
+<script type="text/javascript" charset="utf-8" src="cordova-2.2.0.js"></script>
+<script type="text/javascript" charset="utf-8">
+
+    function onLoad() {
+        document.addEventListener("deviceready", onDeviceReady, false);
+    }
+
+    function onDeviceReady() {
+        document.addEventListener("offline", onOffline, false);
+    }
+	
+	function onOnline() {
+		alert('online');
+    }
+
+    function onOffline() {
+		alert('offline');
+    }
+
+</script>
+	
 </head>
-<body>
+<body onload="onLoad()">
 
 <script src="js/underscore.js"></script>
 <script src="js/jquery.js"></script>
