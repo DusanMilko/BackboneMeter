@@ -31,6 +31,7 @@ App.Models.LoginStatus = Backbone.Model.extend({
 				  this.fetch({ 
                     data: $.param({ nm: this.get('username'), ps: this.get('pass') }) 
                   }).complete(function(){
+				    $('.loaderLogin').addClass('hid');
                     self.userValidate(self);
                   });
 			alert('on ether '+ether);
