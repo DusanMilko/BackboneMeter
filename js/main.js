@@ -33,6 +33,7 @@ App.Models.LoginStatus = Backbone.Model.extend({
                   }).complete(function(){
                     self.userValidate(self);
                   });*/
+			alert('ether '+ether);
         }else{
 			//self.userValidate(self);
 			localStorage.setItem('loggedIn', 'false')
