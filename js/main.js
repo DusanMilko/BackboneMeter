@@ -59,7 +59,9 @@ App.Models.LoginStatus = Backbone.Model.extend({
         this.fetch({ 
             data: $.param({ nm: username, ps: pass }) 
         }).complete(function(){
+			$('.response').removeClass('hid');
             $('.loaderLogin').addClass('hid');
+			this.set({'loggedIn': 'false' });
         });
         
     },

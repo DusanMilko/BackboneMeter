@@ -172,7 +172,7 @@ font-size: 14px; font-weight: bold; display: block; }
     .meterInput div.iCont input { width: 57%;}
     .meterInput label { width: 37%;}
     .meterInput select { width: 61%;}
-    #login img { width: 30%; margin: 0px 35%;}
+    #login img.logo { width: 30%; margin: 0px 35%;}
     #login h1 { width: 100%;}
     #login { padding-top: 30px;}
     .prevReads a { display: none;}
