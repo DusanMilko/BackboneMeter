@@ -34,7 +34,7 @@ h1 img { margin-top: 3px; vertical-align:text-top;}
 #login div.response { margin: 3px 0% 0px; background: #bda100; width: 94%; padding: 8px 3% 8px;
 text-align: center;  font-size: 15px;}
 #login .loader { margin-left: 47%;}
-#login img { width: 20%; clear: both; float: left;}
+#login img.logo { width: 20%; clear: both; float: left;}
 #login h1 { margin-top: 15px; font-size: 26px; width: 80%;}
 
 /* Logout button style */
