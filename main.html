@@ -38,23 +38,12 @@
     //}
 
     function onDeviceReady() {
-		//checkConnection();
-		navigator.network.isReachable("google.com", reachableCallback, {});
+		checkConnection();
+		
 		document.addEventListener("online", onOnline, false);
         document.addEventListener("offline", onOffline, false);
     }
-	function reachableCallback(reachability) {
-	  // There is no consistency on the format of reachability
-	  var networkState = reachability.code || reachability;
-	  var states = {};
-	  states[NetworkStatus.NOT_REACHABLE]                      = 'No network connection';
-	  states[NetworkStatus.REACHABLE_VIA_CARRIER_DATA_NETWORK] = 'Carrier data connection';
-	  states[NetworkStatus.REACHABLE_VIA_WIFI_NETWORK]         = 'WiFi connection';
-	  alert('Connection type: ' + states[networkState] +' '+ ether);
-	  // We want to be able to check the online variable in our jQuery
-	  
-	  //if (networkState != 0) online = true;
-	}
+
 	function checkConnection() {
         var networkState = navigator.network.connection.type;
 
@@ -74,10 +63,29 @@
 		if( states[networkState] == 'Unknown connection' || states[networkState] == 'No network connection' ){
 			ether = 0;
 		}else{
-			ether = 1;
+			//ether = 1;
+			var url = "http://.google.com";
+			$.ajax({
+				type: "GET",
+				data: "{}",
+				url: url,
+				cache: false,
+				timeout: 10 * 1000,
+				success:function(response)
+				{
+					//do something great!
+					ether = 1;
+					alert('Connection type: ' + states[networkState] +' '+ ether);
+				},
+				error:function(xhr, textStatus, errorThrown) {
+					ether = 0;
+					//alert(“Your web connection is running slow. Please retry.”);
+					alert('Connection type: ' + states[networkState] +' '+ ether);
+				}
+			});
 		}
 		
-		alert('Connection type: ' + states[networkState] +' '+ ether);
+		//alert('Connection type: ' + states[networkState] +' '+ ether);
     }
 	
 	function onOnline() {
