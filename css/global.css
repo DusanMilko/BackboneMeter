@@ -22,7 +22,7 @@ h1 { float:left; text-align: center; color: #222; margin-bottom: 20px; font-fami
 h1 img { margin-top: 3px; vertical-align:text-top;}
 
 #login_cont { width: 100%; margin: 0 auto;}
-#login { float: left; width: 80%; padding: 40px 5% 20px; background: #eee; margin: 15% 5% 0px;}
+#login { float: left; width: 80%; padding: 40px 5% 20px; background: #eee; margin: 10% 5% 0px;}
 #login div { clear: both; overflow: hidden; width: 100%; float: left; margin: 0px 0px 0px 0px;}
 #login div.passinput { border-top: 1px solid #eee;}
 #login label { font-size: 14px; cursor: text; float: left; position: absolute; color: #777; opacity: 0; margin: 16px 0px 0px 24px;}
@@ -171,7 +171,7 @@ font-size: 14px; font-weight: bold; display: block; }
     .extend h1 img { vertical-align: -7px;}
     .meterInput div.iCont input { width: 57%;}
     .meterInput label { width: 37%;}
-    .meterInput select { width: 61%;}
+    .meterInput select { width: 51%!important; float: right!important; height: 49px!important; padding: 10px 2%!important;}
     #login img.logo { width: 30%; margin: 0px 35%;}
     #login h1 { width: 100%;}
     #login { padding-top: 30px;}
