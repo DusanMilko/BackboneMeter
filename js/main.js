@@ -728,7 +728,7 @@ App.Router = Backbone.Router.extend({
             this.app.campus.render();
         }
         else{
-            appi.navigate('', true);
+            appi.navigate('campus', true);
         }
         
     },
@@ -743,7 +743,7 @@ App.Router = Backbone.Router.extend({
             this.app.utils.render();
         }
         else{
-            appi.navigate('', true);
+            appi.navigate('campus', true);
         }
         
     },
@@ -769,7 +769,7 @@ App.Router = Backbone.Router.extend({
             }
         }
         else{
-            appi.navigate('', true);
+            appi.navigate('campus', true);
         }
         
     },
@@ -786,7 +786,7 @@ App.Router = Backbone.Router.extend({
    
         }
         else{
-            appi.navigate('', true);
+            appi.navigate('campus', true);
         }
  
     },
@@ -798,7 +798,7 @@ App.Router = Backbone.Router.extend({
 
     defaults: function(other) {
         //alert('You got lost trying to find ' + other);
-        appi.navigate('', true);
+        appi.navigate('campus', true);
     }
 
 });
