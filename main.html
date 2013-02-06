@@ -48,10 +48,7 @@
         var networkState = navigator.network.connection.type;
 
         var states = {};
-		states[NetworkStatus.NOT_REACHABLE]                      = 'No network connection';
-		states[NetworkStatus.REACHABLE_VIA_CARRIER_DATA_NETWORK] = 'Carrier data connection';
-		states[NetworkStatus.REACHABLE_VIA_WIFI_NETWORK]         = 'WiFi connection';
-		/*
+
         states[Connection.UNKNOWN]  = 'Unknown connection';
         states[Connection.ETHERNET] = 'Ethernet connection';
         states[Connection.WIFI]     = 'WiFi connection';
@@ -59,7 +56,7 @@
         states[Connection.CELL_3G]  = 'Cell 3G connection';
         states[Connection.CELL_4G]  = 'Cell 4G connection';
         states[Connection.NONE]     = 'No network connection';
-		*/
+		
 		if( states[networkState] == 'Unknown connection' || states[networkState] == 'No network connection' ){
 			ether = 0;
 		}else{
