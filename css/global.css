@@ -171,7 +171,7 @@ font-size: 14px; font-weight: bold; display: block; }
     .extend h1 img { vertical-align: -7px;}
     .meterInput div.iCont input { width: 57%;}
     .meterInput label { width: 37%;}
-    .meterInput select { width: 51%!important; float: right!important; height: 49px!important; padding: 10px 2%!important;}
+    .meterInput select { width: 21%!important; float: right!important; height: 49px!important; padding: 5px 2%!important;}
     #login img.logo { width: 30%; margin: 0px 35%;}
     #login h1 { width: 100%;}
     #login { padding-top: 30px;}
