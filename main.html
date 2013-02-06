@@ -38,8 +38,30 @@
     //}
 
     function onDeviceReady() {
+		checkConnection();
 		document.addEventListener("online", onOnline, false);
         document.addEventListener("offline", onOffline, false);
+    }
+	
+	function checkConnection() {
+        var networkState = navigator.connection.type;
+
+        var states = {};
+        states[Connection.UNKNOWN]  = 'Unknown connection';
+        states[Connection.ETHERNET] = 'Ethernet connection';
+        states[Connection.WIFI]     = 'WiFi connection';
+        states[Connection.CELL_2G]  = 'Cell 2G connection';
+        states[Connection.CELL_3G]  = 'Cell 3G connection';
+        states[Connection.CELL_4G]  = 'Cell 4G connection';
+        states[Connection.NONE]     = 'No network connection';
+		
+		if( states[networkState] == 'Unknown connection' || states[networkState] == 'No network connection' ){
+			ether = 0;
+		}else{
+			ether = 1;
+		}
+		
+		alert('Connection type: ' + states[networkState] +' '+ ether);
     }
 	
 	function onOnline() {

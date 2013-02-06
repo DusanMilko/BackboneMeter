@@ -142,7 +142,6 @@ App.Views.AppView = Backbone.View.extend({
     
     offlineInit: function(){
         if( JSON.parse(localStorage.getItem('campusStorage')) ){
-			console.log('woof');
 			var campusoffline = JSON.parse(localStorage.getItem('campusStorage'));
 			for( var i = 0; i < campusoffline.length; i++ ){
 				this.campus.collection.models[i] = new App.Models.campus();
@@ -174,7 +173,7 @@ App.Views.AppView = Backbone.View.extend({
         e.preventDefault();
         localStorage.clear();
         this.model.clearLogin();
-	appi.navigate('', true);	
+		appi.navigate('', true);	
     },
     
     changeutil: function(e){
