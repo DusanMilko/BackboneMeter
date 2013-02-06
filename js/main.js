@@ -797,7 +797,7 @@ App.Router = Backbone.Router.extend({
     },
 
     defaults: function(other) {
-        alert('You got lost trying to find ' + other);
+        //alert('You got lost trying to find ' + other);
         appi.navigate('', true);
     }
 
