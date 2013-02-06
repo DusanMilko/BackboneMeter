@@ -1,5 +1,7 @@
 (function() {
 
+$.ajaxSetup({timeout:5000});
+
 window.App = {
 	Models: {},
 	Collections: {},
