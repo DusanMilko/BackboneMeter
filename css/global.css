@@ -162,41 +162,6 @@ text-align: center; text-decoration: none; padding-top: 15px; margin-left: -60px
 font-size: 14px; font-weight: bold; display: block; }
 .prevReads a { float: left; width: 44%; background: #7F354A; display: block; margin: 0px; padding: 10px 2% 8px;}
 
-
-	select.a {	-webkit-appearance: menulist;}
-	select.q {	-webkit-appearance:caps-lock-indicator;}
-	select.w {	-webkit-appearance:button	;}
-	select.e {	-webkit-appearance:button-bevel	;}
-	select.r{	-webkit-appearance:caret	;}
-	select.t {	-webkit-appearance:checkbox	;}
-	select.y {	-webkit-appearance:default-button	;}
-	select.u {	-webkit-appearance:listbox	;}
-	select.i {	-webkit-appearance:listitem	;}
-	select.o {	-webkit-appearance:media-fullscreen-button	;}
-	select.p {	-webkit-appearance:media-mute-button	;}
-	select.s {	-webkit-appearance:media-play-button	;}
-	select.d {	-webkit-appearance:media-seek-back-button	;}
-	select.f {	-webkit-appearance:media-seek-forward-button	;}
-	select.g {	-webkit-appearance:media-slider	;}
-	select.h {	-webkit-appearance:media-sliderthumb	;}
-	select.j {	-webkit-appearance:menulist	;}
-	select.k {	-webkit-appearance:menulist-button	;}
-	select.l {	-webkit-appearance:menulist-text	;}
-	select.z {	-webkit-appearance:menulist-textfield	;}
-	select.x {	-webkit-appearance:push-button	;}
-	select.c {	-webkit-appearance:radio	;}
-	select.v {	-webkit-appearance:searchfield	;}
-	select.b {	-webkit-appearance:searchfield-cancel-button	;}
-	select.n {	-webkit-appearance:searchfield-decoration	;}
-	select.m {	-webkit-appearance:searchfield-results-button	;}
-	select.mm {	-webkit-appearance:searchfield-results-decoration	;}
-	select.nn {	-webkit-appearance:slider-horizontal	;}
-	select.vv {	-webkit-appearance:sliderthumb-horizontal	;}
-	select.xx {	-webkit-appearance:sliderthumb-vertical	;}
-	select.zz {	-webkit-appearance:square-button;	}
-	select.ll {	-webkit-appearance:textarea	;}
-	select.kk {	-webkit-appearance:textfield;}
-
 /* Mobile scaling */
 @media only screen and (max-width: 440px) {
     .nav li span {font-size: 15px; float: left; line-height: 16.5px; width: 60px; margin-left: 11%; }
@@ -206,41 +171,7 @@ font-size: 14px; font-weight: bold; display: block; }
     .extend h1 img { vertical-align: -7px;}
     .meterInput div.iCont input { width: 57%;}
     .meterInput label { width: 37%;}
-    .meterInput select { width: 41%!important; float: left!important; height: 49px!important; padding: 0px 0px!important; 
-	-webkit-appearance: menulist;
--webkit-appearance:caps-lock-indicator;
--webkit-appearance:button	;
--webkit-appearance:button-bevel	;
--webkit-appearance:caret	;
--webkit-appearance:checkbox	;
--webkit-appearance:default-button	;
--webkit-appearance:listbox	;
--webkit-appearance:listitem	;
--webkit-appearance:media-fullscreen-button	;
--webkit-appearance:media-mute-button	;
--webkit-appearance:media-play-button	;
--webkit-appearance:media-seek-back-button	;
--webkit-appearance:media-seek-forward-button	;
--webkit-appearance:media-slider	;
--webkit-appearance:media-sliderthumb	;
--webkit-appearance:menulist	;
--webkit-appearance:menulist-button	;
--webkit-appearance:menulist-text	;
--webkit-appearance:menulist-textfield	;
--webkit-appearance:push-button	;
--webkit-appearance:radio	;
--webkit-appearance:searchfield	;
--webkit-appearance:searchfield-cancel-button	;
--webkit-appearance:searchfield-decoration	;
--webkit-appearance:searchfield-results-button	;
--webkit-appearance:searchfield-results-decoration	;
--webkit-appearance:slider-horizontal, slider-vertical	;
--webkit-appearance:sliderthumb-horizontal	;
--webkit-appearance:sliderthumb-vertical	;
--webkit-appearance:square-button;	
--webkit-appearance:textarea	;
--webkit-appearance:textfield;
-	}
+    .meterInput select { width: 41%!important; float: left!important; height: 49px!important; padding: 0px 0px!important; -webkit-appearance: menulist;}
 	
     #login img.logo { width: 30%; margin: 0px 35%;}
     #login h1 { width: 100%;}
