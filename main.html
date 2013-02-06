@@ -134,6 +134,7 @@
                 on
             <% } %>
             </span>
+			<span class="offline" >offline</span>
         </div>
     </div>
     <div id="main_cont" class="extend">
@@ -159,15 +160,17 @@
             <!-- Title -->
             <h1>PROPworks - Meter Sign In</h1>
 			<div class="loaderLogin hid"><img src="imgs/loader.gif" /></div>
-			<div class="response hid" >Invalid username/password</div>
+			<div id="result" >
+				<div class="response hid" >Invalid username/password</div>
+			</div>
             <div>
-                    <label for="username">Username</label> 
-                    <input type="text" name="username" id="username" value="" /> 
+				<label for="username">Username</label> 
+				<input type="text" name="username" id="username" value="" /> 
             <!--Username: <input name="username" type="text" value="" />-->
             </div>
             <div class="passinput" >
-                    <label for="pass">Password</label> 
-                    <input type="password" name="pass" id="pass" value="" /> 
+				<label for="pass">Password</label> 
+				<input type="password" name="pass" id="pass" value="" /> 
             <!--Password: <input name="pass" type="text" value="" />-->
             </div>
             <!--<button id="send" value="Log In" type="submit">Submit</button>-->

@@ -31,7 +31,7 @@ h1 img { margin-top: 3px; vertical-align:text-top;}
 #login input#send { margin-top: 10px; border: none; width: 100%; float: left; background: #7f354a; color: #fff; cursor: pointer; font-weight: bold; padding: 10px 20px; height: 50px;}
 #login input#send:active { border: none; background: #015486;}
 #login div#result { margin: 5px auto 1px; }
-#login div.response { margin: 3px 0% 0px; background: #bda100; width: 94%; padding: 8px 3% 8px;
+#login div.response { margin: 3px 0% 0px; background: #bda100; width: 94%; padding: 8px 4% 8px 3%;
 text-align: center;  font-size: 15px;}
 #login .loader { margin-left: 47%;}
 #login img.logo { width: 20%; clear: both; float: left;}
@@ -139,7 +139,7 @@ background: #CCC; padding: 16px 0px 13px 2%;}
 .meterInput div { clear: both; overflow: hidden; width: 100%; float: left; margin: 0px 0px 0px 0px;}
 .meterInput div.iCont { margin-top: 10px; background: #fff; }
 .meterInput .date label { width: 96%; background: #ccc; margin: 0px; padding: 10px 2% 8px;}
-.meterInput .response { margin: 3px 0% 0px; background: #bda100; width: 94%; padding: 8px 3% 8px;
+.meterInput .response { margin: 3px 0% 0px; background: #bda100; width: 94%; padding: 8px 4% 8px 3%;
 text-align: center;  font-size: 15px;}
 .meterInput select { width: 74%; float: right;
 height: 49px; border: 0px;
@@ -153,7 +153,7 @@ text-align: center; text-decoration: none; padding-top: 15px; margin-left: -60px
 
 #settings_cont { width: 100%; height: 85px; background: #222; border-bottom: 1px solid #000; }
 #settings { width: 100%; margin: 0px auto;}
-#settings .logout, #settings .changeutil { position: static; top: 0px; margin: 20px 5px 0px; }
+#settings .logout, #settings .changeutil, .offline { position: static; top: 0px; margin: 20px 5px 0px; }
 
 .readingInput { display: none;}
 #readingR { display: block;}
