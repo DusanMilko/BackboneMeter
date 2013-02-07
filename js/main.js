@@ -1,4 +1,4 @@
-//window.ether = 1;
+window.ether = 1;
 (function() {
 
 $.ajaxSetup({timeout:5000});
@@ -843,7 +843,7 @@ App.Router = Backbone.Router.extend({
 });
 var appi = new App.Router;
 this.appi = appi;
-
+window.ether = 1;
 appi.app.render();
 
 Backbone.history.start();
