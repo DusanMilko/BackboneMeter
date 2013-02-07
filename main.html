@@ -75,6 +75,8 @@
 					if( jqxhr.status == 200 ){
 						window.ether = 1;
 						$('#internetError').addClass("hid");
+						appi.app.render();
+						appi.app.campus.render();
 					}
 					else{
 						window.ether = 0;
