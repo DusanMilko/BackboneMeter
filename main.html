@@ -60,24 +60,19 @@
 		if( states[networkState] == 'Unknown connection' || states[networkState] == 'No network connection' ){
 			ether = 0;
 		}else{
-			//ether = 1;
-			var url = "http://.google.com";
-			$.ajax({
-				type: "GET",
-				data: "{}",
-				url: url,
-				cache: false,
-				timeout: 10 * 1000,
-				success:function(response)
+			var url = "http://10.10.10.151:8080/PWmeter/apk/meterCallBB.jsp";
+			$.ajax(
+			{
+				type: 'GET',
+				success: function(data)
 				{
-					//do something great!
 					ether = 1;
-					alert('Connection type: ' + states[networkState] +' '+ ether);
+					alert('Success'+ether);
 				},
-				error:function(xhr, textStatus, errorThrown) {
+				error: function(XMLHttpRequest, textStatus, errorThrown)
+				{
 					ether = 0;
-					//alert(“Your web connection is running slow. Please retry.”);
-					alert('Connection type: ' + states[networkState] +' '+ ether);
+					alert('Failure'+ether);
 				}
 			});
 		}
