@@ -33,20 +33,8 @@
 	
 	var ether = 0;
 	
-	//var url = "http://10.10.10.151:8080/PWmeter/apk/campusCallBB.jsp";
-	$.ajax(
-	{
-		type: 'POST',
-		url: "http://10.10.10.151:8080/PWmeter/apk/campusCallBB.jsp",
-		complete: function (jqxhr) {
-
-		alert("Status: " + jqxhr.status);
-
-		}
-	});
-	
     //function onLoad() {
-    document.addEventListener("deviceready", onDeviceReady, false);
+       document.addEventListener("deviceready", onDeviceReady, false);
     //}
 
     function onDeviceReady() {
@@ -72,7 +60,7 @@
 		if( states[networkState] == 'Unknown connection' || states[networkState] == 'No network connection' ){
 			ether = 0;
 		}else{
-			/*
+			alert(navigator.network.connection.type);
 			var url = "http://10.10.10.151:8080/PWmeter/apk/campusCallBB.jsp";
 			$.ajax(
 			{
@@ -84,7 +72,6 @@
 
 				}
 			});
-			*/
 		}
 		
 		//alert('Connection type: ' + states[networkState] +' '+ ether);
