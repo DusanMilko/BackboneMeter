@@ -42,6 +42,11 @@
 		
 		document.addEventListener("online", onOnline, false);
         document.addEventListener("offline", onOffline, false);
+		document.addEventListener("resume", onResume, false);
+    }
+	
+	function onResume() {
+		checkConnection();
     }
 
 	function checkConnection() {

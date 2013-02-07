@@ -4,7 +4,7 @@
 $.ajaxSetup({timeout:5000});
 
 if( localStorage.getItem('loggedIn') != 'false' ){
-    window.ether = localStorage.getItem('loggedIn');
+    //window.ether = localStorage.getItem('loggedIn');
 }
 
 window.App = {
