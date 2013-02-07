@@ -1,6 +1,11 @@
+window.ether = 1;
 (function() {
 
 $.ajaxSetup({timeout:5000});
+
+if( localStorage.getItem('loggedIn') != 'false' ){
+    window.ether = localStorage.getItem('loggedIn');
+}
 
 window.App = {
 	Models: {},
@@ -40,7 +45,7 @@ App.Models.LoginStatus = Backbone.Model.extend({
        //var ether = 1;
        
        if( this.get('username') != '' && this.get('username') != null ){ 
-            if( ether > 0 ){
+            if( window.ether > 0 ){
                 this.fetch({ 
                     data: $.param({ nm: this.get('username'), ps: this.get('pass') }) 
                 }).complete(function(){
@@ -51,6 +56,7 @@ App.Models.LoginStatus = Backbone.Model.extend({
                     window.setTimeout(function() {
                         $('.goOffline').click();
                     }, 10);
+					appi.app.campus.render(); 
                 }
             }
        }else{
@@ -73,7 +79,7 @@ App.Models.LoginStatus = Backbone.Model.extend({
 		$('.loaderLogin').removeClass('hid');
         
         if( this.get('username') != '' && this.get('username') != null ){ 
-            if( ether > 0 ){
+            if( window.ether > 0 ){
                 this.fetch({ 
                     data: $.param({ nm: this.get('username'), ps: this.get('pass') }) 
                 }).complete(function(){
@@ -192,6 +198,8 @@ App.Views.AppView = Backbone.View.extend({
 			
 			this.campus.render();
 			$('.loader').addClass('hid');
+			window.ether = 0;
+            localStorage.setItem('ether', 0);
 		}
         
     },
@@ -202,6 +210,7 @@ App.Views.AppView = Backbone.View.extend({
         this.model.clearLogin();
 		appi.navigate('', true);	
 		appi.app.render();
+		window.ether = 1;
     },
     
     changeutil: function(e){
