@@ -56,6 +56,7 @@ App.Models.LoginStatus = Backbone.Model.extend({
                     window.setTimeout(function() {
                         $('.goOffline').click();
                     }, 10);
+					appi.app.render();
 					appi.app.campus.render(); 
                 }
             }
