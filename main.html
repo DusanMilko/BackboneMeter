@@ -50,6 +50,7 @@
     }
 
 	function checkConnection() {
+		alert("check");
         var networkState = navigator.network.connection.type;
 
         var states = {};
@@ -61,7 +62,7 @@
         states[Connection.CELL_3G]  = 'Cell 3G connection';
         states[Connection.CELL_4G]  = 'Cell 4G connection';
         states[Connection.NONE]     = 'No network connection';
-		
+		alert("check2");
 		if( states[networkState] == 'Unknown connection' || states[networkState] == 'No network connection' ){
 			window.ether = 0;
 		}else{
@@ -71,12 +72,12 @@
 				type: 'POST',
 				url: url,
 				complete: function (jqxhr) {
-
+alert("check3");
 					if( jqxhr.status == 200 ){
 						window.ether = 1;
 						$('#internetError').addClass("hid");
-						appi.app.render();
-						appi.app.campus.render();
+						//appi.app.render();
+						//appi.app.campus.render();
 					}
 					else{
 						window.ether = 0;
