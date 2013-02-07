@@ -60,19 +60,14 @@
 		if( states[networkState] == 'Unknown connection' || states[networkState] == 'No network connection' ){
 			ether = 0;
 		}else{
-			var url = "http://10.10.10.151:8080/PWmeter/apk/meterCallBB.jsp";
+			var url = "http://10.10.10.151:8080/PWmeter/apk/campusCallBB.jsp";
 			$.ajax(
 			{
-				type: 'GET',
-				success: function(data, textStatus)
-				{
-					ether = 1;
-					alert('Success'+ether+textStatus);
-				},
-				error: function(XMLHttpRequest, textStatus, errorThrown)
-				{
-					ether = 0;
-					alert('Failure'+ether);
+				type: 'POST',
+				complete: function (jqxhr) {
+
+				alert("Location: " + jqxhr.status);
+
 				}
 			});
 		}
