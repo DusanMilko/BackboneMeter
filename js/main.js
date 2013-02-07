@@ -1,4 +1,4 @@
-window.ether = 1;
+//window.ether = 1;
 (function() {
 
 $.ajaxSetup({timeout:5000});

@@ -31,7 +31,7 @@
 <script type="text/javascript" charset="utf-8" src="cordova-2.2.0.js"></script>
 <script type="text/javascript" charset="utf-8">
 	
-	var ether = 0;
+	window.ether = 0;
 	
     //function onLoad() {
        document.addEventListener("deviceready", onDeviceReady, false);
@@ -58,7 +58,7 @@
         states[Connection.NONE]     = 'No network connection';
 		
 		if( states[networkState] == 'Unknown connection' || states[networkState] == 'No network connection' ){
-			ether = 0;
+			window.ether = 0;
 		}else{
 			var url = "http://10.10.10.151:8080/PWmeter/apk/campusCallBB.jsp";
 			$.ajax(
@@ -68,11 +68,11 @@
 				complete: function (jqxhr) {
 
 					if( jqxhr.status == 200 ){
-						ether = 1;
+						window.ether = 1;
 						$('#internetError').addClass("hid");
 					}
 					else{
-						ether = 0;
+						window.ether = 0;
 						$('#internetError').removeClass("hid");
 					}
 					//alert("Status: " + jqxhr.status + ether);
@@ -85,12 +85,12 @@
     }
 	
 	function onOnline() {
-		ether = 1;
+		window.ether = 1;
 		alert('online'+ether);
     }
 
     function onOffline() {
-		ether = 0;
+		window.ether = 0;
 		alert('offline'+ether);
     }
 
