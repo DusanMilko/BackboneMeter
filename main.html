@@ -68,7 +68,13 @@
 				url: url,
 				complete: function (jqxhr) {
 
-				alert("Location: " + jqxhr.status);
+					if( jqxhr.status == 200 ){
+						ether = 1;
+					}
+					else{
+						ether = 0;
+					}
+					alert("Status: " + jqxhr.status + ether);
 
 				}
 			});
