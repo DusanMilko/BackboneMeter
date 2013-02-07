@@ -64,10 +64,10 @@
 			$.ajax(
 			{
 				type: 'GET',
-				success: function(data)
+				success: function(data, textStatus)
 				{
 					ether = 1;
-					alert('Success'+ether);
+					alert('Success'+ether+textStatus);
 				},
 				error: function(XMLHttpRequest, textStatus, errorThrown)
 				{
