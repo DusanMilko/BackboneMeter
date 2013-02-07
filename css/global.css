@@ -155,6 +155,8 @@ text-align: center; text-decoration: none; padding-top: 15px; margin-left: -60px
 #settings { width: 100%; margin: 0px auto;}
 #settings .logout, #settings .changeutil, #settings .goOffline { position: static; top: 0px; margin: 20px 5px 0px; }
 
+#internetError { width: 100%; color: #222; background: #FFFF99; text-align: center; padding: 10px 0px;}
+
 .readingInput { display: none;}
 #readingR { display: block;}
 

@@ -60,7 +60,6 @@
 		if( states[networkState] == 'Unknown connection' || states[networkState] == 'No network connection' ){
 			ether = 0;
 		}else{
-			alert(navigator.network.connection.type);
 			var url = "http://10.10.10.151:8080/PWmeter/apk/campusCallBB.jsp";
 			$.ajax(
 			{
@@ -70,11 +69,13 @@
 
 					if( jqxhr.status == 200 ){
 						ether = 1;
+						$('#internetError').removeClass("hid");
 					}
 					else{
 						ether = 0;
+						$('#internetError').removeClass("hid");
 					}
-					alert("Status: " + jqxhr.status + ether);
+					//alert("Status: " + jqxhr.status + ether);
 
 				}
 			});
@@ -194,7 +195,8 @@
     </div>
 </script>
 <script id="not_logged_in" type="text/html">
-    <div id="main_cont">        
+	<div id="internetError" class="hid">No/Weak Internet Connection</div>
+    <div id="main_cont">     
         <form id="login" class="login">
             <!-- Logo -->
             <img class="logo" src="imgs/airitlogo-TINY.png" />

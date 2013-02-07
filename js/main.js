@@ -6,7 +6,7 @@ window.App = {
 	Models: {},
 	Collections: {},
 	Views: {},
-        Vars: {},
+    Vars: {},
 	Router: {}
 };
 
@@ -48,8 +48,9 @@ App.Models.LoginStatus = Backbone.Model.extend({
                 });
             }else{
                 if( this.get('loggedIn') == "true" ){
-                    console.log('ppp');
-                    this.set({'offline': 'on' });
+                    window.setTimeout(function() {
+                        $('.goOffline').click();
+                    }, 10);
                 }
             }
        }else{
@@ -61,13 +62,39 @@ App.Models.LoginStatus = Backbone.Model.extend({
 
     setUser: function( username, pass ) {
         
+		this.set({'loggedIn': localStorage.getItem('loggedIn')});
         localStorage.setItem('username', username)
         this.set({'username': username});
         localStorage.setItem('pass', pass)
         this.set({'pass': pass});
         
         var self = this;
+		
+		$('.loaderLogin').removeClass('hid');
         
+        if( this.get('username') != '' && this.get('username') != null ){ 
+            if( ether > 0 ){
+                this.fetch({ 
+                    data: $.param({ nm: this.get('username'), ps: this.get('pass') }) 
+                }).complete(function(){
+                    self.userValidate(self);
+                });
+            }else{
+                if( this.get('loggedIn') == "true" ){
+
+                   appi.app.offline();
+                   appi.app.render();
+                   appi.app.campus.render(); 
+                   $('.loader').addClass('hid');
+                   
+                }
+            }
+	    }else{
+			localStorage.setItem('loggedIn', 'false')
+			this.set({'loggedIn': 'false' });
+	    }
+		
+        /*
         //this.fetch({ data: $.param({ nm: username, ps: pass}) })
         $('.loaderLogin').removeClass('hid');
         this.fetch({ 
@@ -132,7 +159,7 @@ App.Views.AppView = Backbone.View.extend({
 	'click a.logout': 'logout',
         'click .changeutil': 'changeutil',
         'click .sett': 'sett',
-        'click .offline': 'offline'
+        'click .goOffline': 'offline'
     },
     
     offline: function(){
@@ -174,6 +201,7 @@ App.Views.AppView = Backbone.View.extend({
         localStorage.clear();
         this.model.clearLogin();
 		appi.navigate('', true);	
+		appi.app.render();
     },
     
     changeutil: function(e){
