@@ -140,7 +140,7 @@ App.Models.LoginStatus = Backbone.Model.extend({
     
     url: function() {
         //return "../apk/checkBB.jsp";
-		return "http://10.10.10.151:8181/PWmeter/apk/checkBB.jsp";
+		return "http://10.10.10.164:8181/PWmeter/apk/checkBB.jsp";
     },
 	
     clearLogin: function() {      
