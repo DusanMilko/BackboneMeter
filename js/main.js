@@ -69,7 +69,9 @@ App.Models.LoginStatus = Backbone.Model.extend({
 
     setUser: function( username, pass ) {
         
-		this.set({'loggedIn': localStorage.getItem('loggedIn')});
+		if( localStorage.getItem('loggedIn') != 'false' ){
+            this.set({'loggedIn': localStorage.getItem('loggedIn')});
+        }
         localStorage.setItem('username', username)
         this.set({'username': username});
         localStorage.setItem('pass', pass)
@@ -81,10 +83,10 @@ App.Models.LoginStatus = Backbone.Model.extend({
         
         if( this.get('username') != '' && this.get('username') != null ){ 
             if( window.ether > 0 ){
-				alert('yup');
                 this.fetch({ 
                     data: $.param({ nm: this.get('username'), ps: this.get('pass') }) 
                 }).complete(function(){
+					alert('yip');
                     self.userValidate(self);
                 });
             }else{
