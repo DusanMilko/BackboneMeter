@@ -140,7 +140,7 @@ App.Models.LoginStatus = Backbone.Model.extend({
     
     url: function() {
         //return "../apk/checkBB.jsp";
-		return "http://10.10.10.151:8080/PWmeter/apk/checkBB.jsp";
+		return "http://10.10.10.151:8181/PWmeter/apk/checkBB.jsp";
     },
 	
     clearLogin: function() {      
@@ -176,6 +176,7 @@ App.Views.AppView = Backbone.View.extend({
     
     offlineInit: function(){
         if( JSON.parse(localStorage.getItem('campusStorage')) ){
+			
 			var campusoffline = JSON.parse(localStorage.getItem('campusStorage'));
 			for( var i = 0; i < campusoffline.length; i++ ){
 				this.campus.collection.models[i] = new App.Models.campus();
@@ -380,7 +381,7 @@ App.Collections.campusColl = Backbone.Collection.extend({
     
     url: function() {
         //return "../apk/campusCallBB.jsp";
-		return "http://10.10.10.151:8080/PWmeter/apk/campusCallBB.jsp";
+		return "http://10.10.10.164:8181/PWmeter/apk/campusCallBB.jsp";
     }
 });
 App.Views.campusColl = Backbone.View.extend({
@@ -467,7 +468,7 @@ App.Collections.utilsColl = Backbone.Collection.extend({
     
     url: function() {
         //return "../apk/utilityCallBB.jsp";
-		return "http://10.10.10.151:8080/PWmeter/apk/utilityCallBB.jsp";
+		return "http://10.10.10.164:8181/PWmeter/apk/utilityCallBB.jsp";
     }
 });
 App.Views.utilsColl = Backbone.View.extend({
@@ -625,7 +626,7 @@ App.Collections.metersColl = Backbone.Collection.extend({
     
     url: function() {
         //return "../apk/meterCallBB.jsp";
-		return "http://10.10.10.151:8080/PWmeter/apk/meterCallBB.jsp";
+		return "http://10.10.10.164:8181/PWmeter/apk/meterCallBB.jsp";
     }
 });
 App.Views.metersColl = Backbone.View.extend({
