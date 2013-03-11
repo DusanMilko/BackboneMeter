@@ -148,7 +148,7 @@ background: #CCC; padding: 16px 0px 13px 2%;}
 text-align: center;  font-size: 15px;}
 .response { margin: 0px 0% 0px; background: #bda100; width: 94%; padding: 8px 3% 8px;
 text-align: center;  font-size: 15px;}
-.meterInput select { width: 74%; float: right;
+.meterInput select { width: 72%; float: right;
 height: 49px; border: 0px;
 margin: 0px; padding: 10px 2%;
 }
@@ -185,7 +185,7 @@ font-size: 14px; font-weight: bold; display: block; }
     .extend h1 img { vertical-align: -7px;}
     .meterInput div.iCont input { width: 57%;}
     .meterInput label { width: 37%;}
-    .meterInput select { width: 41%!important; float: left!important; height: 49px!important; padding: 0px 0px!important; -webkit-appearance: menulist;}
+    .meterInput select { width: 59%;}
 	
     #login img.logo { width: 30%; margin: 0px 35%;}
     #login h1 { width: 100%;}
@@ -193,7 +193,54 @@ font-size: 14px; font-weight: bold; display: block; }
     .prevReads a { display: none;}
 }
 
+/* Select styling */
+/* The CSS */
+select#readT {
+    padding:3px;
+    margin: 0;
+    color:#444;
+    border:none;
+    outline:none;
+    display: inline-block;
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    appearance:none;
+    cursor:pointer;
+}
 
+/* Targetting Webkit browsers only. FF will show the dropdown arrow with so much padding. */
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    select#readT {padding-right:18px}
+}
+
+label.selectfix {
+    position:relative;
+    background: none;
+    float: none;
+    padding: 0px 0px 0px 2%;       
+}
+label.selectfix:after {
+    content:'<>';
+    font:11px "Consolas", monospace;
+    color:#888;
+    -webkit-transform:rotate(90deg);
+    -moz-transform:rotate(90deg);
+    -ms-transform:rotate(90deg);
+    transform:rotate(90deg);
+    right:8px; top:2px;
+    padding:0 0 2px;
+    border-bottom:1px solid #ddd;
+    position:absolute;
+    pointer-events:none;
+}
+label.selectfix:before {
+    content:'';
+    right:6px; top:0px;
+    width:20px; height:20px;
+    position:absolute;
+    pointer-events:none;
+    display:block;
+}
 
 
 
