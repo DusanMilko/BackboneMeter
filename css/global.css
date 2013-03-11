@@ -11,6 +11,7 @@ a:hover { color: #015486;}
 /* Main Body Background */
 /*body { background: url('../imgs/METER_SCREEN_FINAL.jpg') center center fixed no-repeat;
 background-size: cover;}*/
+body { border-top: 4px solid grey;}
 
 /* Max width */
 #main_cont, .main_body, #settings { max-width: 480px; margin: 0 auto;}
