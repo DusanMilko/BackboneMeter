@@ -197,7 +197,7 @@ App.Views.AppView = Backbone.View.extend({
     sortM: function(){
         if( $('.sortM').hasClass('abc') ){
             $('.sortM').removeClass('abc');
-            $('.sortM').text('Sort By ABC');
+            $('.sortM span').text('Sort By ABC');
             this.meters.collection.models = this.meters.collection.sortBy(
                 function(model){
                         return model.cid;
@@ -205,7 +205,7 @@ App.Views.AppView = Backbone.View.extend({
             this.meters.render();
         }else{
             $('.sortM').addClass('abc');
-            $('.sortM').text('Sort By Origin');
+            $('.sortM span').text('Sort By Origin');
             this.meters.collection.models = this.meters.collection.sortBy("name");
             this.meters.render();
         }
