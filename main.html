@@ -78,14 +78,16 @@
 					if( jqxhr.status == 200 ){
 						window.ether = 1;
 						$('#internetError').addClass("hid");
+						$('body').css("border-color", "green");
 						//appi.app.render();
 						//appi.app.campus.render();
 					}
 					else{
 						window.ether = 0;
 						$('#internetError').removeClass("hid");
+						$('body').css("border-color", "red");
 					}
-					alert("Status: " + jqxhr.status + ether + location.host);
+					//alert("Status: " + jqxhr.status + ether + location.host);
 
 				}
 			});
