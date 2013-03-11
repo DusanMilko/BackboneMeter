@@ -130,7 +130,7 @@ dw-inline { overflow: hidden!important;}
 
 /* Meter Input styles */
 .meterInput { margin-top: 1px;}
-.meterInput div.iCont input { color: #222; font-size: 14px; float: right; outline: none; 
+.meterInput div.iCont input { color: #222; font-size: 14px; outline: none; 
 border: none; background: #fff; width: 70%; height: 20px; 
 border-left: 0px solid #7f354a; padding: 15px 0px 15px 4%; 
 margin: 0px 0px 0px 0px; 
@@ -206,6 +206,10 @@ select#readT {
     -moz-appearance:none;
     appearance:none;
     cursor:pointer;
+	font-weight: normal;
+}
+select#readT option {
+    font-weight: normal;
 }
 
 /* Targetting Webkit browsers only. FF will show the dropdown arrow with so much padding. */
