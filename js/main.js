@@ -224,7 +224,7 @@ App.Views.AppView = Backbone.View.extend({
         
         for( var i = 0; i < arr.length; i++ ){
             //this.fetch();
-            var newLoadUrl = "../sendReadBB.jsp?"+arr[i]+"&nm="+appi.app.model.attributes.username+"&ps="+appi.app.model.attributes.pass;
+            var newLoadUrl = window.pwloc+"../sendReadBB.jsp?"+arr[i]+"&nm="+appi.app.model.attributes.username+"&ps="+appi.app.model.attributes.pass;
             $("#result").html(ajax_load).load(newLoadUrl);
         }
         appi.app.offstorage = "";
@@ -245,7 +245,7 @@ App.Views.AppView = Backbone.View.extend({
               cache: false  
             }); 
             var ajax_load = "<img class='hid loader' src='../imgs/loader.gif' alt='loading...' />"; 
-            var newLoadUrl = "../sendReadBB.jsp?"+loadUrl+"&nm="+appi.app.model.attributes.username+"&ps="+appi.app.model.attributes.pass;
+            var newLoadUrl = window.pwloc+"../sendReadBB.jsp?"+loadUrl+"&nm="+appi.app.model.attributes.username+"&ps="+appi.app.model.attributes.pass;
             $("#result").html(ajax_load).load(newLoadUrl);
         }
         
