@@ -252,10 +252,11 @@ App.Views.AppView = Backbone.View.extend({
             var ajax_load = "<img class='hid loader' src='../imgs/loader.gif' alt='loading...' />"; 
             var newLoadUrl;
             if(window.pwloc){
-                newLoadUrl = window.pwloc+"PWmeter/sendReadBB.jsp?"+arr[i]+"&nm="+appi.app.model.attributes.username+"&ps="+appi.app.model.attributes.pass;
                 alert(newLoadUrl);
+                newLoadUrl = window.pwloc+"PWmeter/sendReadBB.jsp?"+arr[i]+"&nm="+appi.app.model.attributes.username+"&ps="+appi.app.model.attributes.pass;
             }
             else{
+                alert("hi"+pwloc);
                 newLoadUrl = "../sendReadBB.jsp?"+arr[i]+"&nm="+appi.app.model.attributes.username+"&ps="+appi.app.model.attributes.pass;
             }
             $("#result").html(ajax_load).load(newLoadUrl);
