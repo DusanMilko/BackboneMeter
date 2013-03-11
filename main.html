@@ -98,12 +98,10 @@
 	
 	function onOnline() {
 		window.ether = 1;
-		alert('online'+ether);
     }
 
     function onOffline() {
 		window.ether = 0;
-		alert('offline'+ether);
     }
 
 </script>
@@ -126,6 +124,7 @@
                 url: url,
                 complete: function (jqxhr) {
                         if( jqxhr.status == 200 ){
+								alert('hi');
                                 window.ether = 1;
                                 $('body').css("border-color", "green");
                                 if( window.appi && window.appi.app.offstorage != "" ){
