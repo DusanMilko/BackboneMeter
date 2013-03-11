@@ -122,9 +122,9 @@
         {
                 type: 'GET',
                 url: url,
+				cache: false,
                 complete: function (jqxhr) {
                         if( jqxhr.status == 200 ){
-								alert('hi');
                                 window.ether = 1;
                                 $('body').css("border-color", "green");
                                 if( window.appi && window.appi.app.offstorage != "" ){
