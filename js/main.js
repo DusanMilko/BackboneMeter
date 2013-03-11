@@ -413,10 +413,12 @@ App.Views.AppView = Backbone.View.extend({
         var pwloc = this.$('input[name=pwloc]').val();
         console.log(pwloc);
         if(pwloc){
-            
+            pwloc = pwloc+"/";
         }else{
-          pwloc = location.origin+"/";
+            pwloc = location.origin+"/";
         }
+        pwloc = pwloc.replace("http://","");
+        pwloc = "http://"+pwloc;
         localStorage.setItem('pwloc', pwloc);
         window.pwloc = pwloc;
         
