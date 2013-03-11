@@ -245,6 +245,7 @@ App.Views.AppView = Backbone.View.extend({
         //appi.app.offstorage = appi.app.offstorage +"~"+ loadUrl;
         if( window.ether == 0 ){
             appi.app.offstorage = appi.app.offstorage +"~"+ loadUrl;  
+            $("#result").html("<div class='response'>Saved into storage</div>");
         }else{
             $.ajaxSetup ({  
               cache: false  
