@@ -85,7 +85,7 @@
 						window.ether = 0;
 						$('#internetError').removeClass("hid");
 					}
-					alert("Status: " + jqxhr.status + ether);
+					alert("Status: " + jqxhr.status + ether + location.host);
 
 				}
 			});
@@ -116,7 +116,7 @@
 <script type="text/javascript" charset="utf-8">
     
     setInterval(function(){
-        var url = "http://"+location.host+"/PWmeter/apk/index.html";
+        var url = "http://10.10.10.188:8181/PWmeter/apk/index.html";
         $.ajaxSetup({timeout:3000});
         $.ajax(
         {
