@@ -146,7 +146,7 @@ background: #CCC; padding: 16px 0px 13px 2%;}
 .meterInput .date label { width: 96%; background: #ccc; margin: 0px; padding: 10px 2% 8px;}
 .meterInput .response, .response { margin: 3px 0% 0px; background: #bda100; width: 94%; padding: 8px 4% 8px 3%;
 text-align: center;  font-size: 15px;}
-.response { margin: 0px 0% 0px; background: #bda100; width: 94%; padding: 8px 3% 8px;
+.response { margin: 0px 0% 0px; background: #bda100; width: 100%; padding: 8px 0% 8px;
 text-align: center;  font-size: 15px;}
 .meterInput select { width: 72%;
 height: 49px; border: 0px;
