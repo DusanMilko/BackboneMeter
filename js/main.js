@@ -225,7 +225,7 @@ App.Views.AppView = Backbone.View.extend({
         for( var i = 0; i < arr.length; i++ ){
             //this.fetch();
             if(window.pwloc){
-                newLoadUrl = window.pwloc+"/sendReadBB.jsp?"+arr[i]+"&nm="+appi.app.model.attributes.username+"&ps="+appi.app.model.attributes.pass;
+                newLoadUrl = window.pwloc+"PWmeter/sendReadBB.jsp?"+arr[i]+"&nm="+appi.app.model.attributes.username+"&ps="+appi.app.model.attributes.pass;
             }
             else{
                 newLoadUrl = "../sendReadBB.jsp?"+arr[i]+"&nm="+appi.app.model.attributes.username+"&ps="+appi.app.model.attributes.pass;
@@ -252,7 +252,7 @@ App.Views.AppView = Backbone.View.extend({
             var ajax_load = "<img class='hid loader' src='../imgs/loader.gif' alt='loading...' />"; 
             var newLoadUrl;
             if(window.pwloc){
-                newLoadUrl = window.pwloc+"/sendReadBB.jsp?"+arr[i]+"&nm="+appi.app.model.attributes.username+"&ps="+appi.app.model.attributes.pass;
+                newLoadUrl = window.pwloc+"PWmeter/sendReadBB.jsp?"+arr[i]+"&nm="+appi.app.model.attributes.username+"&ps="+appi.app.model.attributes.pass;
                 alert(newLoadUrl);
             }
             else{
