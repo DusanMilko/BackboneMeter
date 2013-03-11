@@ -23,7 +23,7 @@ h1 { float:left; text-align: center; color: #222; margin-bottom: 20px; font-fami
 h1 img { margin-top: 3px; vertical-align:text-top;}
 
 #login_cont { width: 100%; margin: 0 auto;}
-#login { float: left; width: 80%; padding: 40px 5% 20px; background: #eee; margin: 10% 5% 0px;}
+#login { float: left; width: 80%; padding: 20px 5% 20px; background: #eee; margin: 5% 5% 0px;}
 #login div { clear: both; overflow: hidden; width: 100%; float: left; margin: 0px 0px 0px 0px;}
 #login div.passinput { border-top: 1px solid #eee;}
 #login label { font-size: 14px; cursor: text; float: left; position: absolute; color: #777; opacity: 0; margin: 16px 0px 0px 24px;}
