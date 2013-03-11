@@ -252,8 +252,8 @@ App.Views.AppView = Backbone.View.extend({
             var ajax_load = "<img class='hid loader' src='../imgs/loader.gif' alt='loading...' />"; 
             var newLoadUrl;
             if(window.pwloc){
-                alert(newLoadUrl);
                 newLoadUrl = window.pwloc+"PWmeter/sendReadBB.jsp?"+arr[i]+"&nm="+appi.app.model.attributes.username+"&ps="+appi.app.model.attributes.pass;
+                alert(newLoadUrl);
             }
             else{
                 alert("hi"+pwloc);
