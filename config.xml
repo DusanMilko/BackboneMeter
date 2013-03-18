@@ -19,6 +19,6 @@
 	
 	<preference name="windowSoftInputMode" value="adjustResize" />
 	
-	<icon src="icon.png" />
+	<icon src="airitlogo-TINY.png" />
 	
 </widget>
