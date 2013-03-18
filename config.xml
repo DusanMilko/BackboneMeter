@@ -17,6 +17,8 @@
 	<preference name="fullscreen" value="true" />
 	<preference name="load-url-timeout" value="10000" />
 	
+	<preference name="windowSoftInputMode" value="adjustResize" />
+	
 	<icon src="icon.png" />
 	
 </widget>
