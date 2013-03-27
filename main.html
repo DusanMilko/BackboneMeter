@@ -75,7 +75,7 @@
 				cache: false,
 				complete: function (jqxhr) {
 					alert( jqxhr.status+" "+jqxhr.statusText+" "+jqxhr.readyState+" "+jqxhr.responseText);
-					if( jqxhr.status == 200 && jqxhr.statusText == "OK" ){
+					if( jqxhr.status == 200 && jqxhr.responseText == '<html><head><meta http-equiv="Access-Control-Allow-Origin" content="*"></head><body>YES</body></html>' ){
 						window.ether = 1;
 						$('#internetError').addClass("hid");
 						$('body').css("border-color", "green");
@@ -124,7 +124,7 @@
 				cache: false,
                 complete: function (jqxhr) {
 						alert( jqxhr.status+" "+jqxhr.statusText+" "+jqxhr.readyState+" "+jqxhr.responseText);
-                        if( jqxhr.status == 200 && jqxhr.statusText == "OK" ){
+                        if( jqxhr.status == 200 && jqxhr.responseText == '<html><head><meta http-equiv="Access-Control-Allow-Origin" content="*"></head><body>YES</body></html>' ){
                                 window.ether = 1;
                                 $('body').css("border-color", "green");
 								$('#internetError').addClass("hid");
@@ -139,13 +139,7 @@
                                 $('body').css("border-color", "red");
                                 
                         }
-                },
-				error: function (xhr, ajaxOptions, thrownError) {
-					alert(xhr.status);
-					alert(thrownError);
-					window.ether = 0;
-                    $('body').css("border-color", "red");
-				}
+                }
         }); 
     },5000);
 	
