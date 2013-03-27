@@ -19,6 +19,6 @@
 	
 	<preference name="windowSoftInputMode" value="adjustResize" />
 	
-	<icon src="airitlogo-TINY.png" />
+	<icon src="meter.png" />
 	
 </widget>
