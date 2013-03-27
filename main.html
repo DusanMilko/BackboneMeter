@@ -74,13 +74,14 @@
 				type: 'GET',
 				url: urli,
 				cache: false,
+				dataType: 'jsonp',
 				complete: function (jqxhr) {
 
 					if( jqxhr.status == 200 ){
 						window.ether = 1;
 						$('#internetError').addClass("hid");
 						$('body').css("border-color", "green");
-						alert("onc "+jqxhr.status);
+						alert("onc "+jqxhr.status + "~" + jqxhr);
 						//appi.app.render();
 						//appi.app.campus.render();
 					}
@@ -129,12 +130,13 @@
                 type: 'GET',
                 url: url,
 				cache: false,
+				dataType: 'jsonp',
                 complete: function (jqxhr) {
                         if( jqxhr.status == 200 ){
                                 window.ether = 1;
                                 $('body').css("border-color", "green");
 								$('#internetError').addClass("hid");
-								alert("int "+jqxhr.status);
+								alert("int "+jqxhr.status + "~" + jqxhr);
                                 if( window.appi && window.appi.app.offstorage != "" ){
                                     window.appi.app.syncUp();
                                     window.appi.app.offstorage = "";
