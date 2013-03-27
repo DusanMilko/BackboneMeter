@@ -68,21 +68,18 @@
 		if( states[networkState] == 'Unknown connection' || states[networkState] == 'No network connection' ){
 			window.ether = 0;
 		}else{
-			var urli = "http://cosmicpolygon.com/acao.html";
-			$.ajaxSetup({cache: false});
+			var url = "http://cosmicpolygon.com/acao.html";
 			$.ajax(
 			{
 				type: 'GET',
-				url: urli,
+				url: url,
 				cache: false,
-				dataType: 'jsonp',
 				complete: function (jqxhr) {
 
-					if( jqxhr.status == 200 ){
+					if( jqxhr.status == 200 && jqxhr.statusText == "OK" ){
 						window.ether = 1;
 						$('#internetError').addClass("hid");
 						$('body').css("border-color", "green");
-						alert("onc "+jqxhr.status + "~" + jqxhr.statusText);
 						//appi.app.render();
 						//appi.app.campus.render();
 					}
@@ -93,10 +90,6 @@
 					}
 					//alert("Status: " + jqxhr.status + ether + location.host);
 
-				},
-				error: function(response) {
-						window.ether = 0;
-                        $('body').css("border-color", "red");
 				}
 			});
 		}
@@ -122,24 +115,20 @@
 <script src="js/mobiscroll-2.2.custom.min.js" type="text/javascript"></script>
 <script src='js/swipe.js'></script>
 <script type="text/javascript" charset="utf-8">
-    var currentdate = new Date();
 	
     setInterval(function(){
-		currentdate = new Date(); 
-        var url = "http://cosmicpolygon.com/acao.html?r="+currentdate;
-        $.ajaxSetup({timeout:3000, cache: false});
+        var url = "http://cosmicpolygon.com/acao.html";
+        $.ajaxSetup({timeout:3000});
         $.ajax(
         {
-                type: 'POST',
+                type: 'GET',
                 url: url,
 				cache: false,
-				dataType: 'jsonp',
                 complete: function (jqxhr) {
-                        if( jqxhr.status == 200 ){
+                        if( jqxhr.status == 200 && jqxhr.statusText == "OK" ){
                                 window.ether = 1;
                                 $('body').css("border-color", "green");
 								$('#internetError').addClass("hid");
-								alert("int "+jqxhr.status + "~" + currentdate);
                                 if( window.appi && window.appi.app.offstorage != "" ){
                                     window.appi.app.syncUp();
                                     window.appi.app.offstorage = "";
@@ -150,11 +139,7 @@
                                 $('body').css("border-color", "red");
                                 
                         }
-                },
-				error: function(response) {
-						window.ether = 0;
-                        $('body').css("border-color", "red");
-				}
+                }
         }); 
     },5000);
 	
