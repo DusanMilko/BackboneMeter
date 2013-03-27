@@ -177,8 +177,16 @@ cursor: pointer; color: #d3be4f; border-top: 1px solid #bbb; border-bottom: 1px 
 font-size: 14px; font-weight: bold; display: block; }
 .prevReads a { float: left; width: 44%; background: #7F354A; display: block; margin: 0px; padding: 10px 2% 8px;}
 
+.goOffline { display: none;} 
+
+/* Tablet */
+@media only screen and (max-width: 1280px) {
+    body { zoom: 1.5;}
+}
+
 /* Mobile scaling */
-@media only screen and (max-width: 440px) {
+@media only screen and (max-width: 560px) {
+	body { zoom: 1;}
     .nav li span {font-size: 15px; float: left; line-height: 16.5px; width: 60px; margin-left: 11%; }
     #main_cont.extend { margin-top: 0px;}
     .logout { top: 0px;}
