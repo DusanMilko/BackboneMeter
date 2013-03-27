@@ -81,7 +81,7 @@
 						window.ether = 1;
 						$('#internetError').addClass("hid");
 						$('body').css("border-color", "green");
-						alert("onc "+jqxhr.status + "~" + jqxhr);
+						alert("onc "+jqxhr.status + "~" + jqxhr.statusText);
 						//appi.app.render();
 						//appi.app.campus.render();
 					}
@@ -136,7 +136,7 @@
                                 window.ether = 1;
                                 $('body').css("border-color", "green");
 								$('#internetError').addClass("hid");
-								alert("int "+jqxhr.status + "~" + jqxhr);
+								alert("int "+jqxhr.status + "~" + jqxhr.statusText);
                                 if( window.appi && window.appi.app.offstorage != "" ){
                                     window.appi.app.syncUp();
                                     window.appi.app.offstorage = "";
