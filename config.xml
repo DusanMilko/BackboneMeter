@@ -19,6 +19,6 @@
 	
 	<preference name="windowSoftInputMode" value="adjustResize" />
 	
-	<icon src="meter.png" />
+	<icon src="meter2.png" />
 	
 </widget>
