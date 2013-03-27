@@ -68,16 +68,11 @@
 		if( states[networkState] == 'Unknown connection' || states[networkState] == 'No network connection' ){
 			window.ether = 0;
 		}else{
-			$.ajaxSetup({cache: false});
-			//var url = "http://cosmicpolygon.com/acao.html"+ "?_=" + jQuery.now();
 			$.ajax(
 			{
 				type: 'POST',
 				url: "http://cosmicpolygon.com/acao.html"+ "?_=" + jQuery.now(),
 				cache: false,
-				headers: {
-					"Cache-Control": "no-cache"
-				},
 				complete: function (jqxhr) {
 					alert( jqxhr.status+" "+jqxhr.statusText+" "+jqxhr.readyState+" "+jqxhr.responseText);
 					if( jqxhr.status == 200 && jqxhr.statusText == "OK" ){
@@ -121,16 +116,12 @@
 <script type="text/javascript" charset="utf-8">
 	
     setInterval(function(){
-        //var url = "http://cosmicpolygon.com/acao.html"+ "?_=" + jQuery.now();
-        $.ajaxSetup({cache: false,timeout:3000});
+        $.ajaxSetup({timeout:3000});
         $.ajax(
         {
                 type: 'POST',
                 url: "http://cosmicpolygon.com/acao.html"+ "?_=" + jQuery.now(),
 				cache: false,
-				headers: {
-					Cache-Control: "no-cache"
-				},
                 complete: function (jqxhr) {
 						alert( jqxhr.status+" "+jqxhr.statusText+" "+jqxhr.readyState+" "+jqxhr.responseText);
                         if( jqxhr.status == 200 && jqxhr.statusText == "OK" ){
@@ -148,7 +139,13 @@
                                 $('body').css("border-color", "red");
                                 
                         }
-                }
+                },
+				error: function (xhr, ajaxOptions, thrownError) {
+					alert(xhr.status);
+					alert(thrownError);
+					window.ether = 0;
+                    $('body').css("border-color", "red");
+				}
         }); 
     },5000);
 	
