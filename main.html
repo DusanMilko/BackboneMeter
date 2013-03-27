@@ -68,7 +68,7 @@
 		if( states[networkState] == 'Unknown connection' || states[networkState] == 'No network connection' ){
 			window.ether = 0;
 		}else{
-			var url = "http://cosmicpolygon.com/acao.html";
+			var url = "http://cosmicpolygon.com/acao.html"+ "?_=" + jQuery.now();
 			$.ajax(
 			{
 				type: 'GET',
@@ -117,12 +117,12 @@
 <script type="text/javascript" charset="utf-8">
 	
     setInterval(function(){
-        var url = "http://cosmicpolygon.com/acao.html";
+        //var url = "http://cosmicpolygon.com/acao.html"+ "?_=" + jQuery.now();
         $.ajaxSetup({timeout:3000});
         $.ajax(
         {
                 type: 'GET',
-                url: url,
+                url: "http://cosmicpolygon.com/acao.html"+ "?_=" + jQuery.now(),
 				cache: false,
                 complete: function (jqxhr) {
 						alert( jqxhr.status+" "+jqxhr.statusText+" "+jqxhr.readyState+" "+jqxhr.responseText);
