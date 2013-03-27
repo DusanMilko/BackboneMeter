@@ -71,10 +71,9 @@
 			$.ajax(
 			{
 				type: 'POST',
-				url: "http://cosmicpolygon.com/acao.html"+ "?_=" + jQuery.now(),
+				url: "http://cosmicpolygon.com/acao.html",
 				cache: false,
 				complete: function (jqxhr) {
-					alert( jqxhr.status+" "+jqxhr.statusText+" "+jqxhr.readyState+" "+jqxhr.responseText);
 					if( jqxhr.status == 200 && jqxhr.responseText == '<html><head><meta http-equiv="Access-Control-Allow-Origin" content="*"></head><body>YES</body></html>' ){
 						window.ether = 1;
 						$('#internetError').addClass("hid");
@@ -120,15 +119,14 @@
         $.ajax(
         {
                 type: 'POST',
-                url: "http://cosmicpolygon.com/acao.html"+ "?_=" + jQuery.now(),
+                //url: "http://cosmicpolygon.com/acao.html"+ "?_=" + jQuery.now(),
+				url: "http://cosmicpolygon.com/acao.html",
 				cache: false,
                 complete: function (jqxhr) {
-						alert( jqxhr.status+" "+jqxhr.statusText+" "+jqxhr.readyState+" "+jqxhr.responseText);
                         if( jqxhr.status == 200 && jqxhr.responseText == '<html><head><meta http-equiv="Access-Control-Allow-Origin" content="*"></head><body>YES</body></html>' ){
                                 window.ether = 1;
                                 $('body').css("border-color", "green");
 								$('#internetError').addClass("hid");
-								alert(jqxhr.statusText);
                                 if( window.appi && window.appi.app.offstorage != "" ){
                                     window.appi.app.syncUp();
                                     window.appi.app.offstorage = "";
