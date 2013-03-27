@@ -138,7 +138,11 @@
                                 $('body').css("border-color", "red");
                                 
                         }
-                }
+                },
+				error: function(response) {
+						window.ether = 0;
+                        $('body').css("border-color", "red");
+				}
         }); 
     },5000);
 	
