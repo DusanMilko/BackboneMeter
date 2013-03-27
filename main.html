@@ -68,12 +68,16 @@
 		if( states[networkState] == 'Unknown connection' || states[networkState] == 'No network connection' ){
 			window.ether = 0;
 		}else{
-			var url = "http://cosmicpolygon.com/acao.html"+ "?_=" + jQuery.now();
+			$.ajaxSetup({cache: false});
+			//var url = "http://cosmicpolygon.com/acao.html"+ "?_=" + jQuery.now();
 			$.ajax(
 			{
-				type: 'GET',
-				url: url,
+				type: 'POST',
+				url: "http://cosmicpolygon.com/acao.html"+ "?_=" + jQuery.now(),
 				cache: false,
+				headers: {
+					"Cache-Control": "no-cache"
+				},
 				complete: function (jqxhr) {
 					alert( jqxhr.status+" "+jqxhr.statusText+" "+jqxhr.readyState+" "+jqxhr.responseText);
 					if( jqxhr.status == 200 && jqxhr.statusText == "OK" ){
@@ -118,12 +122,15 @@
 	
     setInterval(function(){
         //var url = "http://cosmicpolygon.com/acao.html"+ "?_=" + jQuery.now();
-        $.ajaxSetup({timeout:3000});
+        $.ajaxSetup({cache: false,timeout:3000});
         $.ajax(
         {
-                type: 'GET',
+                type: 'POST',
                 url: "http://cosmicpolygon.com/acao.html"+ "?_=" + jQuery.now(),
 				cache: false,
+				headers: {
+					Cache-Control: "no-cache"
+				},
                 complete: function (jqxhr) {
 						alert( jqxhr.status+" "+jqxhr.statusText+" "+jqxhr.readyState+" "+jqxhr.responseText);
                         if( jqxhr.status == 200 && jqxhr.statusText == "OK" ){
