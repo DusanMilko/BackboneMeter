@@ -75,7 +75,7 @@
 				url: url,
 				cache: false,
 				complete: function (jqxhr) {
-
+					alert( jqxhr.status+" "+jqxhr.statusText+" "+jqxhr.readyState+" "+jqxhr.responseText);
 					if( jqxhr.status == 200 && jqxhr.statusText == "OK" ){
 						window.ether = 1;
 						$('#internetError').addClass("hid");
@@ -125,6 +125,7 @@
                 url: url,
 				cache: false,
                 complete: function (jqxhr) {
+						alert( jqxhr.status+" "+jqxhr.statusText+" "+jqxhr.readyState+" "+jqxhr.responseText);
                         if( jqxhr.status == 200 && jqxhr.statusText == "OK" ){
                                 window.ether = 1;
                                 $('body').css("border-color", "green");
