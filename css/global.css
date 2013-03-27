@@ -14,8 +14,8 @@ background-size: cover;}*/
 body { border-top: 4px solid grey;}
 
 /* Max width */
-#main_cont, .main_body, #settings { max-width: 480px; margin: 0 auto;}
-#main_cont.extend { max-width: 562px; margin-top: 20px;}
+#main_cont, .main_body, #settings { max-width: 740px; margin: 0 auto;}
+#main_cont.extend { max-width: 800px; margin-top: 20px;}
 
 /* Login style */
 .tabn a:active { color: #fff;}
