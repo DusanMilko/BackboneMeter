@@ -90,6 +90,10 @@
 					}
 					//alert("Status: " + jqxhr.status + ether + location.host);
 
+				},
+				error: function(response) {
+						window.ether = 0;
+                        $('body').css("border-color", "red");
 				}
 			});
 		}
