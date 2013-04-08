@@ -354,7 +354,8 @@ App.Views.AppView = Backbone.View.extend({
     
     onMeterUpdate: function(e){
         e.preventDefault();
-        
+        $('input').blur();
+		
         var readT = $("#readT option:selected").val();
         var read = $("#reading"+readT).val();
         var date = $(".prevReads li .d").text();
