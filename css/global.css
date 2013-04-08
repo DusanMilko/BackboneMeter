@@ -229,8 +229,8 @@ font-weight: bold; padding: 10px 20px; height: 50px;}
     .android-ics .dwwr { margin: -5px 0px;}
     .meterInput div.iCont { margin-top: 6px;}
     .meterInput input#sendM, .meterInput input#updateM { margin-top: 5px;}
-    .content { padding: 15px 3% 10px;}
-	
+    .content { padding: 10px 3% 6px;}
+	.sett { margin-top: -10px;}
 	.meterInput .date label, .prevReads span.rTitle { padding: 7px 2% 5px;}
 }
 
