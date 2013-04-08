@@ -171,7 +171,41 @@
 <script id="meter_view" type="text/html">
 
     <form class="meterInput">
-
+	
+		<% 
+        var tt = escape('name');
+        var ttt = "";
+        if( appi.app.prevRead.collection.where({name: tt }).length > 0 ) {
+            ttt = appi.app.prevRead.collection.where({name: tt });
+         
+        %>
+		<div class="prevReads">
+            <span class="rTitle" >Last Inputed Reading</span> 
+            <div class="Rhead">
+                <span class="d" >Date</span>
+                <span class="t" >Type</span>
+                <span class="v" >Value</span>
+            </div>
+            <div>
+                <ul>
+                    <%
+                    for( var i = 0; i < ttt.length; i++){
+                    %>
+                    <li>
+                        <div>
+                            <span class="d"><%=ttt[i].attributes.date %></span>
+                            <span class="t"><%=ttt[i].attributes.type %></span>
+                            <span class="v"><%=parseFloat(ttt[i].attributes.val) %></span>
+                            <span class="s hid"><%=parseFloat(ttt[i].attributes.seqN) %></span>
+                        </div>
+                    </li>
+                    <%
+                    }
+                    %>
+                </ul>
+            </div>
+        </div>
+        <% } %>
         <div class="date">
             <label for="date">Choose Read Date</label> 
             <input id="scroller" class="hid" name="scroller" value="<%= window.date %>" />
@@ -196,7 +230,18 @@
             <input type="number" step="any" name="readingE" id="readingE" class="readingInput" value=""  /> 
             <input type="number" step="any" name="readingI" id="readingI" class="readingInput" value=""  /> 
         </div>
+        <% 
+        var tt = escape('name');
+        var ttt = "";
+        if( appi.app.prevRead.collection.where({name: tt }).length > 0 ) {
+            ttt = appi.app.prevRead.collection.where({name: tt });
+         
+        %>
+        <input type="submit" id="sendM" class="split" value="ADD READING" name="submit" />
+        <input type="submit" id="updateM" value="UPDATE READING" name="submit" />
+        <% }else{ %>
         <input type="submit" id="sendM" value="ADD READING" name="submit" />
+        <% } %>
     </form>
     <script>
         

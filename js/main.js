@@ -11,7 +11,7 @@ window.App = {
 	Models: {},
 	Collections: {},
 	Views: {},
-        Vars: {},
+    Vars: {},
 	Router: {}
 };
 
@@ -25,14 +25,16 @@ App.Models.LoginStatus = Backbone.Model.extend({
         valid: 'false',
         offline: 'off',
         utils: 'utils',
-        camps: 'camp'
+        camps: 'camp',
+		ether: '0'
     },
 
     initialize: function () {
-        this.on( 'change:valid', this.userValidate, this );
+        //this.on( 'change:valid', this.userValidate, this );
         this.set({'loggedIn': localStorage.getItem('loggedIn')});
         this.set({'username': localStorage.getItem('username')});
         this.set({'pass': localStorage.getItem('pass')}); 
+		this.on( 'change:ether', this.refetch, this );
         
         if(localStorage.getItem('camps') == null){
             this.set({'camps': 'camp'});
@@ -75,6 +77,17 @@ App.Models.LoginStatus = Backbone.Model.extend({
             this.set({'loggedIn': 'false' });
        }
         
+    },
+	
+	refetch: function( username, pass ) {
+        
+        var self = this;
+        
+        if( this.get('username') != '' && this.get('username') != null ){ 
+            if( window.ether > 0 ){ 
+                v.getColl( self.get('username'), self.get('pass') );
+            }
+       }
     },
 
     setUser: function( username, pass ) {
@@ -145,6 +158,7 @@ App.Models.LoginStatus = Backbone.Model.extend({
             localStorage.setItem('loggedIn', 'true')
             this.set({'loggedIn': 'true' });
             v.getColl( this.get('username'), this.get('pass') );
+			appi.app.render();
             
         }else{
             localStorage.setItem('loggedIn', 'false')
@@ -188,10 +202,18 @@ App.Views.AppView = Backbone.View.extend({
         'click .sett': 'sett',
         'click .goOffline': 'offline',
         'click select':'propigate',
-        'submit .meterInput': 'onMeterSubmit',
+        //'submit .meterInput': 'onMeterSubmit',
+		'click #sendM': 'onMeterSubmit',
+        'click #updateM': 'onMeterUpdate',
         'click .sync': 'syncUp',
         'click .sortM': 'sortM',
-        'click .changecamps': 'changecamps'
+        'click .changecamps': 'changecamps',
+		'click .noSubmit': 'noSubmit',
+        'click .yesSubmit': 'yesSubmit'
+    },
+	
+	noSubmit: function() {
+        $("#result").text('');
     },
     
     sortM: function(){
@@ -237,12 +259,64 @@ App.Views.AppView = Backbone.View.extend({
     
     onMeterSubmit: function(e){
         e.preventDefault();
+		$('input').blur();
+		
         var readT = $("#readT option:selected").val();
         var read = $("#reading"+readT).val();
         var date = $("#scroller.hid").val();
         //var loadUrl = "sendRead.jsp?read="+read+"&readT="+readT+"&rDate="+date+"&camp="+this.meter.model.attributes.campus+"&util="+this.meter.model.attributes.util+"&mNum="+this.meter.model.attributes.name;
         var loadUrl = "read="+read+"&readT="+readT+"&rDate="+date+"&camp="+this.meter.model.attributes.campus+"&util="+this.meter.model.attributes.util+"&mNum="+this.meter.model.attributes.name;
         //appi.app.offstorage = appi.app.offstorage +"~"+ loadUrl;
+        //Check percentage threshold
+        if( appi.app.prevRead.collection.where({name: this.meter.model.attributes.name }).length > 0 ) {
+            var percy = appi.app.prevRead.collection.where({name: this.meter.model.attributes.name });
+            if( Number(percy[0].attributes.val) + (Number(percy[0].attributes.val)*(Number(percy[0].attributes.aPerc)/100)) <= Number(read) && percy[0].attributes.aPerc != "null" ){
+                $("#result").html("<div class='response'>Broke Percentage Threshold, Reading Too High</div><span class='respCont'><span class='yesSubmit'>Submit Anyways</span><span class='noSubmit'>Don't Submit</span></span>");
+            }else{
+                
+                if( window.ether == 0 ){
+                    appi.app.offstorage = appi.app.offstorage +"~"+ loadUrl;  
+                    $("#result").html("<div class='response'>Saved into storage</div>");
+                }else{
+                    $.ajaxSetup ({  
+                      cache: false  
+                    }); 
+                    var ajax_load = "<img class='hid loader' src='imgs/loader.gif' alt='loading...' />"; 
+                    var newLoadUrl;
+                    if(window.pwloc){
+                        newLoadUrl = window.pwloc+"PWmeter/sendReadBB.jsp?"+loadUrl+"&nm="+appi.app.model.attributes.username+"&ps="+appi.app.model.attributes.pass;
+                    }
+                    else{
+                        newLoadUrl = "sendReadBB.jsp?"+loadUrl+"&nm="+appi.app.model.attributes.username+"&ps="+appi.app.model.attributes.pass;
+                    }
+                    $("#result").html(ajax_load).load(newLoadUrl, function() {
+                        if( $(".response").hasClass("green") ){
+                            percy[0].set('val', read);
+                            percy[0].set('type', readT);
+                            percy[0].set('date', date+" 00:00:00.0");
+                        }
+                    });
+                }
+            }
+        }
+        $('body').scrollTop(0);
+        
+        localStorage.setItem('date', date);
+        window.date = date;
+        console.log(loadUrl);        
+    },
+	
+	yesSubmit: function(e){
+        e.preventDefault();
+        $('input').blur();
+        
+        var readT = $("#readT option:selected").val();
+        var read = $("#reading"+readT).val();
+        var date = $("#scroller.hid").val();
+        //var loadUrl = "sendRead.jsp?read="+read+"&readT="+readT+"&rDate="+date+"&camp="+this.meter.model.attributes.campus+"&util="+this.meter.model.attributes.util+"&mNum="+this.meter.model.attributes.name;
+        var loadUrl = "read="+read+"&readT="+readT+"&rDate="+date+"&camp="+this.meter.model.attributes.campus+"&util="+this.meter.model.attributes.util+"&mNum="+this.meter.model.attributes.name;
+        //appi.app.offstorage = appi.app.offstorage +"~"+ loadUrl;
+        
         if( window.ether == 0 ){
             appi.app.offstorage = appi.app.offstorage +"~"+ loadUrl;  
             $("#result").html("<div class='response'>Saved into storage</div>");
@@ -250,20 +324,64 @@ App.Views.AppView = Backbone.View.extend({
             $.ajaxSetup ({  
               cache: false  
             }); 
-            var ajax_load = "<img class='hid loader' src='../imgs/loader.gif' alt='loading...' />"; 
+            var ajax_load = "<img class='hid loader' src='imgs/loader.gif' alt='loading...' />"; 
             var newLoadUrl;
             if(window.pwloc){
                 newLoadUrl = window.pwloc+"PWmeter/sendReadBB.jsp?"+loadUrl+"&nm="+appi.app.model.attributes.username+"&ps="+appi.app.model.attributes.pass;
             }
             else{
-                newLoadUrl = "../sendReadBB.jsp?"+loadUrl+"&nm="+appi.app.model.attributes.username+"&ps="+appi.app.model.attributes.pass;
+                newLoadUrl = "sendReadBB.jsp?"+loadUrl+"&nm="+appi.app.model.attributes.username+"&ps="+appi.app.model.attributes.pass;
             }
-            $("#result").html(ajax_load).load(newLoadUrl);
+            var self = this;
+            $("#result").html(ajax_load).load(newLoadUrl, function() {
+                var percy = appi.app.prevRead.collection.where({name: self.meter.model.attributes.name });
+                if( $(".response").hasClass("green") ){
+                    percy[0].set('val', read);
+                    percy[0].set('type', readT);
+                    percy[0].set('date', date+" 00:00:00.0");
+                }
+            });
         }
-        
+
+        $('body').scrollTop(0);
         localStorage.setItem('date', date);
-        window.date = date;
-        console.log(loadUrl);        
+        window.date = date;        
+    },
+    
+    onMeterUpdate: function(e){
+        e.preventDefault();
+        
+        var readT = $("#readT option:selected").val();
+        var read = $("#reading"+readT).val();
+        var date = $(".prevReads li .d").text();
+        date = date.trim();
+        date = date.substring(0, date.indexOf(' '));
+        var seqN = $(".prevReads li .s").text();
+        var loadUrl = "read="+read+"&seqN="+seqN+"&readT="+readT+"&rDate="+date+"&camp="+this.meter.model.attributes.campus+"&util="+this.meter.model.attributes.util+"&mNum="+this.meter.model.attributes.name;
+        if( window.ether == 0 ){
+            $("#result").html("<div class='response'>Can't update when offline</div>");
+        }else{
+            $.ajaxSetup ({  
+              cache: false  
+            }); 
+            var ajax_load = "<img class='hid loader' src='imgs/loader.gif' alt='loading...' />"; 
+            var newLoadUrl;
+            if(window.pwloc){
+                newLoadUrl = window.pwloc+"PWmeter/updateReadBB.jsp?"+loadUrl+"&nm="+appi.app.model.attributes.username+"&ps="+appi.app.model.attributes.pass;
+            }
+            else{
+                newLoadUrl = "updateReadBB.jsp?"+loadUrl+"&nm="+appi.app.model.attributes.username+"&ps="+appi.app.model.attributes.pass;
+            }
+            var self = this;
+            $("#result").html(ajax_load).load(newLoadUrl, function() {
+                var percy = appi.app.prevRead.collection.where({name: self.meter.model.attributes.name });
+                if( $(".response").hasClass("green") ){
+                    percy[0].set('val', read);
+                    percy[0].set('type', readT);
+                    percy[0].set('date', date+" 00:00:00.0");
+                }
+            });
+        }
     },
     
     propigate: function(){
@@ -318,6 +436,13 @@ App.Views.AppView = Backbone.View.extend({
                 this.meters.collection.models[i].attributes = metersoffline[i];
             }
             this.meters.collection.length = this.meters.collection.models.length;
+			
+			var prevoffline = JSON.parse(localStorage.getItem('prevStorage'));
+            for( var i = 0; i < prevoffline.length; i++ ){
+                this.prevRead.collection.models[i] = new App.Models.prevRead();
+                this.prevRead.collection.models[i].attributes = prevoffline[i];
+            }
+            this.prevRead.collection.length = this.prevRead.collection.models.length;
                 
             if( this.model.get('page') == 'campus' ){
                 this.campus.render();    
@@ -343,7 +468,7 @@ App.Views.AppView = Backbone.View.extend({
         e.preventDefault();
         localStorage.clear();
         this.model.clearLogin();
-	appi.navigate('', true);
+		appi.navigate('', true);
         appi.app.render();
         window.ether = 1;
     },
@@ -818,6 +943,26 @@ App.Views.meters = Backbone.View.extend({
     
     render: function(){ 
         //this.$el.html( this.model.get('name') );
+		
+		//Already exist prev reading			
+		var tt = this.model.get('name');			
+	    if( appi.app.prevRead.collection.where({name: tt }).length > 0 ) {			
+			var ttt = appi.app.prevRead.collection.where({name: tt });			
+			var dt = new Date()			
+			var dm = dt.getMonth();			
+			var dy = dt.getFullYear();			
+				for( var i=0; i<ttt.length; i++){			
+				var tttt = ttt[i].get('date').substring(0,11);			
+				var tfifth = tttt.split('-');			
+	                			
+	        	if( dm > 1 && parseInt(tfifth[0])==dy && parseInt(tfifth[1])>dm ){			
+	            	$(this.el).addClass('red');			
+	        	}else if( dm == 1 && parseInt(tfifth[0])>=dy-1 && parseInt(tfifth[1])>=12 ){			
+	            	$(this.el).addClass('red');			
+	        	}			
+	        }  			
+	    }
+		
         $(this.el).empty().html(this._metersView(this.model));
         return this;
     }
@@ -843,7 +988,8 @@ App.Collections.metersColl = Backbone.Collection.extend({
         //this.fetch({ data: $.param({ nm: user, ps: pass, camp: camp }) });
         var self = this;
         this.fetch({ data: $.param({ nm: user, ps: pass, camp: camp }), success: function() {
-                var metersStorage = JSON.stringify(self.toJSON());
+                t.getColl( user, pass );
+				var metersStorage = JSON.stringify(self.toJSON());
                 localStorage.setItem( 'metersStorage', metersStorage );
                 appi.app.renderView();
                 $('.loader').addClass('hid');
@@ -920,14 +1066,14 @@ var w = new App.Collections.metersColl([
     }
 ]);
 
-//Attempt to show meter page
+//Meter page
 App.Views.meter = Backbone.View.extend({
   
     _aMeterView: _.template($('#meter_view').html()),
     
     initialize: function () { 
         
-        this.render();  
+        //this.render();  
 
     },
     
@@ -936,8 +1082,9 @@ App.Views.meter = Backbone.View.extend({
         $(this.el).empty().html(this._aMeterView(this.model));
         
         $('.campus_cont').html( this.$el );
-        
-        $("#scroller").scroller({ mode: "scroller", display: "inline", theme: "android-ics light", preset: 'date', dateFormat: "yy-mm-dd", 
+		var dt = new Date();
+        var dy = dt.getFullYear();
+        $("#scroller").scroller({ mode: "scroller", display: "inline", theme: "android-ics light", preset: 'date', dateFormat: "yy-mm-dd", endYear: dy,
                 monthNamesShort: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'] });
         
         //localStorage.setItem('date', 'true');
@@ -955,7 +1102,99 @@ App.Models.meter = Backbone.Model.extend({
     }
     
 });
-//End attempt
+//End Meter
+
+//Prev Readings
+App.Views.prevRead = Backbone.View.extend({
+  
+    //_prevView: _.template($('#prevRead_view').html()),
+    
+    initialize: function () {  
+
+    },
+    
+    render: function(){ 
+       // $(this.el).empty().html(this._prevView(this.model));
+        
+        return this;
+    }
+});
+App.Models.prevRead = Backbone.Model.extend({
+
+    defaults: {
+        campus: '',
+        util: '',
+        name: '',
+        val: '',
+        type: '',
+        date: '',
+        aPerc: '',
+        aDir: '',
+        seqN: ''
+    }
+    
+});
+App.Views.prevReadColl = Backbone.View.extend({
+    tagName: 'ul',
+    
+    initialize: function () {
+      
+    },
+    
+    render: function(){
+        this.$el.empty();
+        
+        this.collection.each( function(meter){
+            _PrevView = new App.Views.meters({model: meter });
+            this.$el.append( _PrevView.render().el );
+        }, this);
+       
+        return this;
+    }
+    
+});
+App.Collections.prevReadColl = Backbone.Collection.extend({
+    model: App.Models.prevRead,
+    
+    initialize: function () {  
+        
+    },
+    
+    getColl: function( user, pass ) {
+        //this.fetch({ data: $.param({ nm: user, ps: pass, camp: camp }) });
+        var self = this;
+        this.fetch({ data: $.param({ nm: user, ps: pass }), success: function() {
+                var prevStorage = JSON.stringify(self.toJSON());
+                localStorage.setItem( 'prevStorage', prevStorage );
+                
+                //localStorage.setItem( 'metersStorage', metersStorage );
+                //appi.app.renderView();
+        }});
+    },
+    
+    url: function() {
+        if(window.pwloc){
+            return window.pwloc+"PWmeter/prevReadBB.jsp";
+        }else{
+            return "prevReadBB.jsp";
+        }
+    }
+    
+});
+var t = new App.Collections.prevReadColl([
+    {
+        campus: '',
+        util: '',
+        name: '',
+        val: '',
+        type: '',
+        date: '',
+        aPerc: '',
+        aDir: '',
+        seqN: ''
+    }
+]);
+// End Prev Readings
 
 App.Router = Backbone.Router.extend({
     
@@ -972,6 +1211,9 @@ App.Router = Backbone.Router.extend({
         this.app.meters = new App.Views.metersColl({ collection: metersV, constraint: id });
         this.app.meter = new App.Views.meter({ model: new App.Models.meter({name: id}) }); 
 
+		var prevReadV = t;
+        this.app.prevRead = new App.Views.prevReadColl({ collection: prevReadV }); 
+		
         $('body').html(this.app.el);
         
         //this.app.render();

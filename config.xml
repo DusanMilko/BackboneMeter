@@ -3,7 +3,7 @@
 	xmlns:gap = "http://phonegap.com/ns/1.0"
 	id        = "com.phonegap.backbonepwmeter"
 	versionCode="10" 
-	version   = "0.0.8">
+	version   = "0.9.0">
 
     <!-- versionCode is optional and Android only -->
 
