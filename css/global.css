@@ -208,7 +208,7 @@ font-weight: bold; padding: 10px 20px; height: 50px;}
 body { zoom: 1.25;}
 #main_cont, .main_body, #settings { max-width: 1440px; margin: 0 auto;}
 #main_cont.extend { max-width: 1500px; margin-top: 20px;}
-body .android-ics { zoom: 0.8!important; }
+.dwwr, .dwwc { zoom: normal!important; }
 
 /* Mobile scaling */
 @media only screen and (max-width: 560px) {
