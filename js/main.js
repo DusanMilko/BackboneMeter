@@ -202,7 +202,7 @@ App.Views.AppView = Backbone.View.extend({
         'click .sett': 'sett',
         'click .goOffline': 'offline',
         'click select':'propigate',
-        //'submit .meterInput': 'onMeterSubmit',
+        'submit .meterInput': 'woops',
 		'click #sendM': 'onMeterSubmit',
         'click #updateM': 'onMeterUpdate',
         'click .sync': 'syncUp',
@@ -210,6 +210,10 @@ App.Views.AppView = Backbone.View.extend({
         'click .changecamps': 'changecamps',
 		'click .noSubmit': 'noSubmit',
         'click .yesSubmit': 'yesSubmit'
+    },
+	
+	woops: function(e) {
+        e.preventDefault();
     },
 	
 	noSubmit: function() {
@@ -382,6 +386,7 @@ App.Views.AppView = Backbone.View.extend({
                 }
             });
         }
+		$('body').scrollTop(0);
     },
     
     propigate: function(){
