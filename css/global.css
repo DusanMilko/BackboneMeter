@@ -231,7 +231,7 @@ font-weight: bold; padding: 10px 20px; height: 50px;}
     .meterInput input#sendM, .meterInput input#updateM { margin-top: 5px;}
     .content { padding: 15px 3% 10px;}
 	
-	.meterInput .date label, .prevReads span.rTitle { {padding: 7px 2% 5px;}
+	.meterInput .date label, .prevReads span.rTitle { padding: 7px 2% 5px;}
 }
 
 /* Select styling */
