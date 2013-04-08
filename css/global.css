@@ -197,7 +197,7 @@ margin: 0 1% 14px 1%; font-size: 12px; color: white; text-decoration: none; text
 .prevReads li .v { width: 35%; }
 .prevReads li div { padding: 8px 0px; background: #C0D4E0; margin-bottom: 5px;}
 
-.meterInput input#sendM.split { width: 49%; margin-right: 2%}
+.meterInput #sendM.split { width: 49%; margin-right: 2%}
 #updateM { margin-top: 5px; border: none; width: 49%; 
 float: left; background: #015486; color: #fff; cursor: pointer; 
 font-weight: bold; padding: 10px 20px; height: 50px;
