@@ -203,6 +203,8 @@ font-weight: bold; padding: 10px 20px; height: 50px;}
 .respCont span.yesSubmit { background: #7f354a;}
 .respCont span.noSubmit { background: #015486;}
 
+.sett { margin-top: -15px; position: static;}
+
 /* Tablet */
 @media only screen and (max-width: 1280px) {
     body { zoom: 1.5;}
