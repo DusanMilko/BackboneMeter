@@ -202,21 +202,135 @@
             </div>
         </div>
         <% } %>
+        <% 
+        var tt = escape('name');
+        var ttt = "";
+        if( appi.app.prevRead.collection.where({name: tt }).length > 0 ) {
+            ttt = appi.app.prevRead.collection.where({name: tt });
+            var ttt = appi.app.prevRead.collection.where({name: tt });
+            var dt = new Date()
+            var dm = dt.getMonth();
+            var dy = dt.getFullYear();
+            for( var i=0; i<ttt.length; i++){
+                var tttt = ttt[i].get('date').substring(0,11);
+                var tfifth = tttt.split('-');
+                
+                if( dm > 1 && parseInt(tfifth[0])==dy && parseInt(tfifth[1])>dm ){
+                    %>
+                    <span id="sendM" class="split">ADD READING</span>
+                    <span id="updateM" >UPDATE READING</span>
+                    
+                    <div class="hid inputCont">
+                        <div class="date">
+                            <label for="date">Choose Read Date</label> 
+                            <input id="scroller" class="hid" name="scroller" value="<%= window.date %>" />
+                        </div>
+                        <div class="iCont"> 
+                            <label for="readingT">Reading Type</label> 
+                            <label class="selectfix">
+                                <select name="readT" id="readT">
+                                    <option value="R">Regular</option>
+                                    <option value="U">Usage</option>
+                                    <option value="F">Final</option>
+                                    <option value="E">Estimated</option>
+                                    <option value="I">Initial</option>
+                                </select> 
+                            </label>    
+                        </div>
+                        <div class="iCont"> 
+                            <label for="reading">Reading</label> 
+                            <input type="number" step="any" name="readingR" id="readingR" class="readingInput" value=""  />
+                            <input type="number" step="any" name="readingU" id="readingU" class="readingInput" value=""  /> 
+                            <input type="number" step="any" name="readingF" id="readingF" class="readingInput" value=""  /> 
+                            <input type="number" step="any" name="readingE" id="readingE" class="readingInput" value=""  /> 
+                            <input type="number" step="any" name="readingI" id="readingI" class="readingInput" value=""  /> 
+                        </div>
+                    </div>
+                    
+                    <%
+                }else if( dm == 1 && parseInt(tfifth[0])>=dy-1 && parseInt(tfifth[1])>=12 ){
+                    %>
+                    <span id="sendM" class="split">ADD READING</span>
+                    <span id="updateM" >UPDATE READING</span>
+                    
+                    <div class="hid inputCont">
+                        <div class="date">
+                            <label for="date">Choose Read Date</label> 
+                            <input id="scroller" class="hid" name="scroller" value="<%= window.date %>" />
+                        </div>
+                        <div class="iCont"> 
+                            <label for="readingT">Reading Type</label> 
+                            <label class="selectfix">
+                                <select name="readT" id="readT">
+                                    <option value="R">Regular</option>
+                                    <option value="U">Usage</option>
+                                    <option value="F">Final</option>
+                                    <option value="E">Estimated</option>
+                                    <option value="I">Initial</option>
+                                </select> 
+                            </label>    
+                        </div>
+                        <div class="iCont"> 
+                            <label for="reading">Reading</label> 
+                            <input type="number" step="any" name="readingR" id="readingR" class="readingInput" value=""  />
+                            <input type="number" step="any" name="readingU" id="readingU" class="readingInput" value=""  /> 
+                            <input type="number" step="any" name="readingF" id="readingF" class="readingInput" value=""  /> 
+                            <input type="number" step="any" name="readingE" id="readingE" class="readingInput" value=""  /> 
+                            <input type="number" step="any" name="readingI" id="readingI" class="readingInput" value=""  /> 
+                        </div>
+                    </div>
+                    
+                    <%
+                }else{
+                    %>
+                    <div class="date">
+                        <label for="date">Choose Read Date</label> 
+                        <input id="scroller" class="hid" name="scroller" value="<%= window.date %>" />
+                    </div>
+                    <div class="iCont"> 
+                        <label for="readingT">Reading Type</label> 
+                        <label class="selectfix">
+                            <select name="readT" id="readT">
+                                <option value="R">Regular</option>
+                                <option value="U">Usage</option>
+                                <option value="F">Final</option>
+                                <option value="E">Estimated</option>
+                                <option value="I">Initial</option>
+                            </select> 
+                        </label>    
+                    </div>
+                    <div class="iCont"> 
+                        <label for="reading">Reading</label> 
+                        <input type="number" step="any" name="readingR" id="readingR" class="readingInput" value=""  />
+                        <input type="number" step="any" name="readingU" id="readingU" class="readingInput" value=""  /> 
+                        <input type="number" step="any" name="readingF" id="readingF" class="readingInput" value=""  /> 
+                        <input type="number" step="any" name="readingE" id="readingE" class="readingInput" value=""  /> 
+                        <input type="number" step="any" name="readingI" id="readingI" class="readingInput" value=""  /> 
+                    </div>
+                    <input type="submit" id="subM" class="sendMe" value="SUBMIT" name="submit" />
+                    <%
+                }
+            } 
+            
+         
+        %>
+        
+        <% }else{ %>
         <div class="date">
             <label for="date">Choose Read Date</label> 
             <input id="scroller" class="hid" name="scroller" value="<%= window.date %>" />
         </div>
         <div class="iCont"> 
             <label for="readingT">Reading Type</label> 
-			<label class="selectfix">
-				<select name="readT" id="readT">
-					<option value="R">Regular</option>
-					<option value="U">Usage</option>
-					<option value="F">Final</option>
-					<option value="E">Estimated</option>
-					<option value="I">Initial</option>
-				</select> 
-			</label>  
+            <label class="selectfix">
+                <select name="readT" id="readT">
+                    <option value="R">Regular</option>
+                    <option value="U">Usage</option>
+                    <option value="F">Final</option>
+                    <option value="E">Estimated</option>
+                    <option value="I">Initial</option>
+                </select> 
+            </label>    
         </div>
         <div class="iCont"> 
             <label for="reading">Reading</label> 
@@ -226,18 +340,10 @@
             <input type="number" step="any" name="readingE" id="readingE" class="readingInput" value=""  /> 
             <input type="number" step="any" name="readingI" id="readingI" class="readingInput" value=""  /> 
         </div>
-        <% 
-        var tt = escape('name');
-        var ttt = "";
-        if( appi.app.prevRead.collection.where({name: tt }).length > 0 ) {
-            ttt = appi.app.prevRead.collection.where({name: tt });
-         
-        %>
-        <input type="submit" id="sendM" class="split" value="ADD READING" name="submit" />
-        <input type="submit" id="updateM" value="UPDATE READING" name="submit" />
-        <% }else{ %>
-        <input type="submit" id="sendM" value="ADD READING" name="submit" />
+        <input type="submit" id="subM" class="sendMe" value="SUBMIT" name="submit" />
         <% } %>
+        
+        <input type="submit" id="subM" class="hid" value="SUBMIT" name="submit" />
     </form>
     <script>
         

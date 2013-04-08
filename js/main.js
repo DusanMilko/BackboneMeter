@@ -203,13 +203,33 @@ App.Views.AppView = Backbone.View.extend({
         'click .goOffline': 'offline',
         'click select':'propigate',
         'submit .meterInput': 'woops',
-		'click #sendM': 'onMeterSubmit',
-        'click #updateM': 'onMeterUpdate',
+		'click #sendM': 'sendM',
+        'click #updateM': 'updateM',
         'click .sync': 'syncUp',
         'click .sortM': 'sortM',
         'click .changecamps': 'changecamps',
 		'click .noSubmit': 'noSubmit',
-        'click .yesSubmit': 'yesSubmit'
+        'click .yesSubmit': 'yesSubmit',
+		'click #subM.sendMe': 'onMeterSubmit',
+        'click #subM.updateMe': 'onMeterUpdate'
+    },
+	
+	sendM: function(e) {
+        e.preventDefault();
+        $(".inputCont").removeClass('hid');
+        $(".date").removeClass('hid');
+        $("#subM").removeClass('hid');
+        $("#subM").removeClass('updateMe');
+        $("#subM").addClass('sendMe');
+    },
+    
+    updateM: function(e) {
+        e.preventDefault();
+        $(".inputCont").removeClass('hid');
+        $(".date").addClass('hid');
+        $("#subM").removeClass('hid');
+        $("#subM").removeClass('sendMe');
+        $("#subM").addClass('updateMe');
     },
 	
 	woops: function(e) {
@@ -275,7 +295,7 @@ App.Views.AppView = Backbone.View.extend({
         if( appi.app.prevRead.collection.where({name: this.meter.model.attributes.name }).length > 0 ) {
             var percy = appi.app.prevRead.collection.where({name: this.meter.model.attributes.name });
             if( Number(percy[0].attributes.val) + (Number(percy[0].attributes.val)*(Number(percy[0].attributes.aPerc)/100)) <= Number(read) && percy[0].attributes.aPerc != "null" ){
-                $("#result").html("<div class='response'>Broke Percentage Threshold, Reading Too High</div><span class='respCont'><span class='yesSubmit'>Submit Anyways</span><span class='noSubmit'>Don't Submit</span></span>");
+                $("#result").html("<div class='response'>Exceeded Percentage Threshold, Reading Too High</div><span class='respCont'><span class='yesSubmit'>Submit Anyways</span><span class='noSubmit'>Don't Submit</span></span>");
             }else{
                 
                 if( window.ether == 0 ){
@@ -644,7 +664,7 @@ App.Views.AppView = Backbone.View.extend({
             this.meters.render();
         }
         else if( this.model.get('page').indexOf('meter/') !== -1 ){
-            this.meter.render();
+            //this.meter.render();
         }
     },
 

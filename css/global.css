@@ -109,8 +109,8 @@ border-bottom-color: #ccc;
 border-top-color: #666;
 }
 .campus_list li a:active .descr { color: #d3be4f;}
-.campus_list li.red a { background: #D15D5D!important;}
-.campus_list li.red a span.code { background: #FFA3A3!important;}
+.campus_list li.red a { background: #9FD187!important;}
+.campus_list li.red a span.code { background: #B0E7A2!important;}
 
 /* Content List styles */
 .code {padding: 10px 0%;
@@ -135,10 +135,14 @@ border: none; background: #fff; width: 70%; height: 20px;
 border-left: 0px solid #7f354a; padding: 15px 0px 15px 4%; 
 margin: 0px 0px 0px 0px; 
 -webkit-focus-ring-color: none!important; -webkit-appearance: none!important;-webkit-box-flex: 1; -webkit-box-shadow: none; -webkit-border-radius: 0;-webkit-tap-highlight-color: rgba(255, 255, 255, 0); }
-.meterInput input#send, .meterInput input#sendM { margin-top: 10px; border: none; width: 100%; 
+.meterInput #send, .meterInput #sendM , #subM{ margin-top: 5px; border: none; width: 100%; 
 float: left; background: #7f354a; color: #fff; cursor: pointer; 
-font-weight: bold; padding: 10px 20px; height: 50px;}
-.meterInput input#send:active, .meterInput input#sendM:active { border: none; background: #015486;}
+font-weight: bold; padding: 10px 20px; height: 50px;
+padding: 10px 0px;
+height: 18px;
+text-align: center;}
+#subM {  height: 50px; }
+.meterInput #send:active, .meterInput #sendM:active { border: none; background: #015486;}
 .meterInput label { width: 24%; font-size: 14px; cursor: text; float: left; color: #444;
 background: #CCC; padding: 16px 0px 13px 2%;}
 .meterInput div { clear: both; overflow: hidden; width: 100%; float: left; margin: 0px 0px 0px 0px;}
@@ -194,9 +198,12 @@ margin: 0 1% 14px 1%; font-size: 12px; color: white; text-decoration: none; text
 .prevReads li div { padding: 8px 0px; background: #C0D4E0; margin-bottom: 5px;}
 
 .meterInput input#sendM.split { width: 49%; margin-right: 2%}
-#updateM { margin-top: 10px; border: none; width: 49%; 
+#updateM { margin-top: 5px; border: none; width: 49%; 
 float: left; background: #015486; color: #fff; cursor: pointer; 
-font-weight: bold; padding: 10px 20px; height: 50px;}
+font-weight: bold; padding: 10px 20px; height: 50px;
+padding: 10px 0px;
+height: 18px;
+text-align: center;}
 
 .respCont { width: 100%; max-width: 800px; float: left;}
 .respCont span { float: left; width: 50%; text-align: center; padding: 6px 0px; cursor: pointer; font-weight: bold; color: #fff;}
@@ -209,6 +216,8 @@ body { zoom: 1.25;}
 #main_cont, .main_body, #settings { max-width: 1440px; margin: 0 auto;}
 #main_cont.extend { max-width: 1500px; margin-top: 20px;}
 .dwwr, .dwwc { zoom: normal!important; }
+
+.meterInput div.date { margin-top: 5px;}
 
 /* Mobile scaling */
 @media only screen and (max-width: 560px) {
