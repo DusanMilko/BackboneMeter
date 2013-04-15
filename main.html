@@ -74,6 +74,8 @@
 						window.ether = 1;
 						$('#internetError').addClass("hid");
 						$('body').css("border-color", "green");
+						$('.eBar').css("background", "green");
+                        $('.eBar').text("Online");
 						//appi.app.render();
 						//appi.app.campus.render();
 					}
@@ -81,6 +83,8 @@
 						window.ether = 0;
 						$('#internetError').removeClass("hid");
 						$('body').css("border-color", "red");
+						$('.eBar').css("background", "red");
+                        $('.eBar').text("Offline");
 					}
 					//alert("Status: " + jqxhr.status + ether + location.host);
 
@@ -122,6 +126,8 @@
                         if( jqxhr.status == 200 && jqxhr.responseText == '<html><head><meta http-equiv="Access-Control-Allow-Origin" content="*"></head><body>YES</body></html>' ){
                                 window.ether = 1;
                                 $('body').css("border-color", "green");
+								$('.eBar').css("background", "green");
+                                $('.eBar').text("Online");
 								$('#internetError').addClass("hid");
                                 if( window.appi && window.appi.app.offstorage != "" ){
                                     window.appi.app.syncUp();
@@ -131,6 +137,8 @@
                         else{
                                 window.ether = 0;
                                 $('body').css("border-color", "red");
+								$('.eBar').css("background", "red");
+                                $('.eBar').text("Offline");
                                 
                         }
                 }
@@ -176,7 +184,7 @@
          
         %>
 		<div class="prevReads">
-            <span class="rTitle" >Last Inputed Reading</span> 
+            <span class="rTitle" >Last Inputed Reading for <%=appi.app.model.attributes.page.substr(6)%></span> 
             <div class="Rhead">
                 <span class="d" >Date</span>
                 <span class="t" >Type</span>
@@ -189,8 +197,33 @@
                     %>
                     <li>
                         <div>
-                            <span class="d"><%=ttt[i].attributes.date %></span>
-                            <span class="t"><%=ttt[i].attributes.type %></span>
+                            <span class="d">
+                                <%
+                                var tempe = ttt[i].attributes.date;
+                                tempe = tempe.trim();
+                                tempe = tempe.substring(0, tempe.indexOf(' '));
+                                %>
+                                <%=tempe%>
+                            </span>
+                            <span class="t">
+                                <%
+                                if( ttt[i].attributes.type == 'R' ){
+                                %>Reg<%
+                                }
+                                if( ttt[i].attributes.type == 'I' ){
+                                %>Ini<%
+                                }
+                                if( ttt[i].attributes.type == 'F' ){
+                                %>Fin<%
+                                }
+                                if( ttt[i].attributes.type == 'E' ){
+                                %>Est<%
+                                }
+                                if( ttt[i].attributes.type == 'U' ){
+                                %>Usg<%
+                                }
+                                %>
+                            </span>
                             <span class="v"><%=parseFloat(ttt[i].attributes.val) %></span>
                             <span class="s hid"><%=parseFloat(ttt[i].attributes.seqN) %></span>
                         </div>
@@ -351,6 +384,8 @@
     </script>
 </script>
 <script id="logged_in" type="text/html">
+	<div class="eBar">Detecting Connection</div>
+	<div class='syncstat hid'></div>
     <div id="settings_cont" class="hid">
         <div id="settings">
             <a class="logout" href="#">logout</a>
@@ -390,6 +425,7 @@
     </div>
 </script>
 <script id="not_logged_in" type="text/html">
+	<div class="eBar">Detecting Connection</div>
 	<div id="internetError" class="hid">No/Weak Internet Connection</div>
     <div id="main_cont">    
         <form id="login" class="login">
@@ -407,7 +443,7 @@
             </div>
             <div>
 				<label for="username">Username</label> 
-				<input type="text" name="username" id="username" value="" /> 
+				<input type="text" name="username" id="username" value="" autocomplete="off"/> 
             <!--Username: <input name="username" type="text" value="" />-->
             </div>
             <div class="passinput" >
@@ -424,7 +460,7 @@
 
         //Input replace and initialize styles
         $("form label").css("display","block");
-        $("form label").stop().animate({"opacity": "1"}, 600);
+        $("form label").css("opacity", "1");
         $("form input").focus(function () {
                         $(this).siblings("label").stop().animate({"opacity": "0"}, 400);
                         $(this).siblings("label").css("display","none");
@@ -436,6 +472,11 @@
                         }
         });
         $("form div input").val("");
+		
+		if( window.pwloc ){
+            $(".pwloc label").css("opacity","0");
+            $("#pwloc").val(window.pwloc);
+        }
 
     });
     </script>

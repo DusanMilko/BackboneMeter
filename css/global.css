@@ -11,7 +11,12 @@ a:hover { color: #015486;}
 /* Main Body Background */
 /*body { background: url('../imgs/METER_SCREEN_FINAL.jpg') center center fixed no-repeat;
 background-size: cover;}*/
-body { border-top: 4px solid grey;}
+body { border-top: 15px solid grey;}
+.eBar { background: #777; color: #fff; width: 100%; position: absolute; width: 100%; top: 0; float: left; text-align: center; padding: 0px 0px; font-size: 11px; height: 15px; overflow:hidden;}
+.syncstat { z-index: 99; position: absolute; top: 0; float: left; width: 96%;padding: 0px 2% 35px; background: #444; color: #fff;}
+.syncstat span { clear: both; float: left; width: 90%; padding: 5px 5%;}
+.syncstat span.title { font-size: 20px;}
+.syncstat span.closestat { background: #666; padding: 10px 5%;}
 
 /* Max width */
 #main_cont, .main_body, #settings { max-width: 740px; margin: 0 auto;}
@@ -164,10 +169,10 @@ text-align: center; text-decoration: none; padding-top: 15px; margin-left: -60px
 
 #settings_cont { width: 100%; height: 85px; background: #222; border-bottom: 1px solid #000; }
 #settings { width: 100%; margin: 0px auto;}
-#settings .logout, #settings .changeutil, #settings .changecamps, #settings .goOffline, .sync { position: static; top: 0px; margin: 20px 5px 0px; }
+#settings .logout, #settings .changeutil, #settings .changecamps, #settings .goOffline, .sync { position: static; top: 0px; margin: 20px 10px 0px 0px; }
 
 #internetError { width: 100%; color: #222; background: #FFFF99; text-align: center; padding: 10px 0px;}
-.sortM { float: left; background: #777; width: 90%; padding: 4px 5%;
+.sortM { float: left; background: #777; width: 90%; padding: 7px 5%;
 cursor: pointer; color: #d3be4f; border-top: 1px solid #bbb; border-bottom: 1px solid #555;}
 .sortM:active {  background: #666; border-top: 1px solid #555; border-bottom: 1px solid #bbb;}
 .sortM span { margin-left: 5%;}

@@ -211,7 +211,8 @@ App.Views.AppView = Backbone.View.extend({
 		'click .noSubmit': 'noSubmit',
         'click .yesSubmit': 'yesSubmit',
 		'click #subM.sendMe': 'onMeterSubmit',
-        'click #subM.updateMe': 'onMeterUpdate'
+        'click #subM.updateMe': 'onMeterUpdate',
+		'click .closestat': 'syncstat'
     },
 	
 	sendM: function(e) {
@@ -221,6 +222,8 @@ App.Views.AppView = Backbone.View.extend({
         $("#subM").removeClass('hid');
         $("#subM").removeClass('updateMe');
         $("#subM").addClass('sendMe');
+		$("#subM").attr('value','SUBMIT ADD');
+        $("#subM").css('background','#7f354a');
     },
     
     updateM: function(e) {
@@ -230,6 +233,8 @@ App.Views.AppView = Backbone.View.extend({
         $("#subM").removeClass('hid');
         $("#subM").removeClass('sendMe');
         $("#subM").addClass('updateMe');
+		$("#subM").attr('value','SUBMIT UPDATE');
+        $("#subM").css('background','#015486');
     },
 	
 	woops: function(e) {
@@ -251,14 +256,24 @@ App.Views.AppView = Backbone.View.extend({
             this.meters.render();
         }else{
             $('.sortM').addClass('abc');
-            $('.sortM span').text('Sort By Origin');
+            $('.sortM span').text('Sort By Sequence Number');
             this.meters.collection.models = this.meters.collection.sortBy("name");
             this.meters.render();
+        }
+    },
+	
+	syncstat: function(){
+        if( $('.syncstat').hasClass('hid') ){
+            $('.syncstat').removeClass('hid');
+        }else{
+            $('.syncstat').addClass('hid');
+            $('#result').html('');
         }
     },
     
     syncUp: function(){
         console.log('sync');
+        $('.syncstat').removeClass('hid');
         var str=appi.app.offstorage;
         str = str.substring(1);
         var arr=str.split("~");
@@ -266,19 +281,53 @@ App.Views.AppView = Backbone.View.extend({
         $.ajaxSetup ({  
             cache: false  
         });  
-        var ajax_load = "<img class='hid loader' src='../imgs/loader.gif' alt='loading...' />"; 
+        var ajax_load = "<img class='hid loader' src='imgs/loader.gif' alt='loading...' />"; 
         var newLoadUrl;
-        for( var i = 0; i < arr.length; i++ ){
-            //this.fetch();
-            if(window.pwloc){
-                newLoadUrl = window.pwloc+"PWmeter/sendReadBB.jsp?"+arr[i]+"&nm="+appi.app.model.attributes.username+"&ps="+appi.app.model.attributes.pass;
+        
+        if(appi.app.offstorage != ""){
+            var errors = 0;
+            var vari = new Array(); 
+            var errvars = "";
+            var county = -1;
+            for( var i = 0; i < arr.length; i++ ){
+                //this.fetch();
+                if(window.pwloc){
+                    newLoadUrl = window.pwloc+"PWmeter/sendReadBB.jsp?"+arr[i]+"&nm="+appi.app.model.attributes.username+"&ps="+appi.app.model.attributes.pass;
+                }
+                else{
+                    newLoadUrl = "../sendReadBB.jsp?"+arr[i]+"&nm="+appi.app.model.attributes.username+"&ps="+appi.app.model.attributes.pass;
+                }
+                var ii = i;
+                var ss = arr.length;
+                vari[i] = arr[i];
+
+                $("#result").html(ajax_load).load(newLoadUrl, function(response, status, xhr) {
+                    county=county+1;
+                    if( response.indexOf("<div class='response red'>Failed</div>") != -1 ){
+                        errors = errors+1; 
+                        errvars = errvars+"~"+vari[county];
+                        console.log(county+" "+errvars);
+                    }if(ii == arr.length-1){
+                        
+                        $('body .syncstat').html("<span class='closestat'>Close Status Page</span><span class='title'>Syncing Status</span><span class='green'>Successful Syncs: "+(ss-errors)+"</span><span class='red'>Errors: "+errors+"</span><span class='errlist'></span>");      
+                        var temp1=errvars.split("~");
+                        var str1 = "<li>Failed Readings:</li>";
+                        for( var j = 1; j < temp1.length; j++ ){
+                            str1 = str1+"<li>Meter: "+temp1[j].substr(temp1[j].indexOf("mNum=",0)+5)+"  |  Reading:"+
+                                temp1[j].substr( temp1[j].indexOf("read=",0)+5, temp1[j].indexOf("&readT=")-5);
+                                +"</li>";
+                        }
+                        $('body .syncstat .errlist').html('<ul>'+str1+'</ul>');
+                
+                    }
+                });
+                
+                
+                
             }
-            else{
-                newLoadUrl = "../sendReadBB.jsp?"+arr[i]+"&nm="+appi.app.model.attributes.username+"&ps="+appi.app.model.attributes.pass;
-            }
-            $("#result").html(ajax_load).load(newLoadUrl);
+            appi.app.offstorage = "";
+        
         }
-        appi.app.offstorage = "";
     },
     
     onMeterSubmit: function(e){
@@ -380,7 +429,7 @@ App.Views.AppView = Backbone.View.extend({
         var read = $("#reading"+readT).val();
         var date = $(".prevReads li .d").text();
         date = date.trim();
-        date = date.substring(0, date.indexOf(' '));
+        //date = date.substring(0, date.indexOf(' '));
         var seqN = $(".prevReads li .s").text();
         var loadUrl = "read="+read+"&seqN="+seqN+"&readT="+readT+"&rDate="+date+"&camp="+this.meter.model.attributes.campus+"&util="+this.meter.model.attributes.util+"&mNum="+this.meter.model.attributes.name;
         if( window.ether == 0 ){
