@@ -614,13 +614,17 @@ App.Views.AppView = Backbone.View.extend({
         var pwloc = this.$('input[name=pwloc]').val();
         console.log(pwloc);
         if(pwloc){
-            pwloc = pwloc+"/";
+			if( pwloc.lastIndexOf("/")+1 == pwloc.length ){
+				pwloc = pwloc;
+			}else{
+				pwloc = pwloc+"/";
+			}	
         }else{
             pwloc = location.origin+"/";
         }
         pwloc = pwloc.replace("http://","");
         pwloc = "http://"+pwloc;
-        localStorage.setItem('pwloc', (pwloc.substr(0,str.length-1)) );
+        localStorage.setItem('pwloc', pwloc );
         window.pwloc = pwloc;
         
         this.model.setUser(
