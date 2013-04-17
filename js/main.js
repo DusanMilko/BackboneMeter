@@ -1,7 +1,7 @@
 window.ether = 1;
 (function() {
 
-$.ajaxSetup({timeout:5000});
+$.ajaxSetup({timeout:4000});
 
 if( localStorage.getItem('loggedIn') != 'false' ){
     window.ether = localStorage.getItem('loggedIn');
