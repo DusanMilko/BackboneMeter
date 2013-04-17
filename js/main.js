@@ -620,7 +620,7 @@ App.Views.AppView = Backbone.View.extend({
         }
         pwloc = pwloc.replace("http://","");
         pwloc = "http://"+pwloc;
-        localStorage.setItem('pwloc', pwloc);
+        localStorage.setItem('pwloc', (pwloc.substr(0,str.length-1)) );
         window.pwloc = pwloc;
         
         this.model.setUser(
