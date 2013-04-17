@@ -327,6 +327,8 @@ App.Views.AppView = Backbone.View.extend({
             }
             appi.app.offstorage = "";
         
+        }else{
+            $('body .syncstat').html("<span class='closestat'>Close Status Page</span>");
         }
     },
     
@@ -345,6 +347,8 @@ App.Views.AppView = Backbone.View.extend({
             var percy = appi.app.prevRead.collection.where({name: this.meter.model.attributes.name });
             if( Number(percy[0].attributes.val) + (Number(percy[0].attributes.val)*(Number(percy[0].attributes.aPerc)/100)) <= Number(read) && percy[0].attributes.aPerc != "null" ){
                 $("#result").html("<div class='response'>Exceeded Percentage Threshold, Reading Too High</div><span class='respCont'><span class='yesSubmit'>Submit Anyways</span><span class='noSubmit'>Don't Submit</span></span>");
+            }else if( read < Number(percy[0].attributes.val) ){
+                $("#result").html("<div class='response'>Your Reading is lower than the pevious reading</div><span class='respCont'><span class='yesSubmit'>Submit Anyways</span><span class='noSubmit'>Don't Submit</span></span>");          
             }else{
                 
                 if( window.ether == 0 ){
