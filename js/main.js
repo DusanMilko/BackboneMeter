@@ -171,9 +171,9 @@ App.Models.LoginStatus = Backbone.Model.extend({
     
     url: function() {
         if(window.pwloc){
-            return window.pwloc+"PWmeter/apk/checkBB.jsp";
+            return window.pwloc+"PWmeter/checkBB.jsp";
         }else{
-            return "../apk/checkBB.jsp";
+            return "../checkBB.jsp";
         }
     },
 	
@@ -795,13 +795,11 @@ App.Collections.campusColl = Backbone.Collection.extend({
     },
     
     url: function() {
-        //return "../apk/campusCallBB.jsp";
-        //return window.pwloc+"PWmeter/apk/campusCallBB.jsp";
-        
+ 
         if(window.pwloc){
-            return window.pwloc+"PWmeter/apk/campusCallBB.jsp";
+            return window.pwloc+"PWmeter/campusCallBB.jsp";
         }else{
-            return "../apk/campusCallBB.jsp";
+            return "../campusCallBB.jsp";
         }
     }
 });
@@ -888,12 +886,11 @@ App.Collections.utilsColl = Backbone.Collection.extend({
     },
     
     url: function() {
-        //return window.pwloc+"PWmeter/apk/utilityCallBB.jsp";
-        
+	
         if(window.pwloc){
-            return window.pwloc+"PWmeter/apk/utilityCallBB.jsp";
+            return window.pwloc+"PWmeter/utilityCallBB.jsp";
         }else{
-            return "../apk/utilityCallBB.jsp";
+            return "../utilityCallBB.jsp";
         }
     }
 });
@@ -1080,11 +1077,10 @@ App.Collections.metersColl = Backbone.Collection.extend({
     },
     
     url: function() {
-        //return window.pwloc+"PWmeter/apk/meterCallBB.jsp";
         if(window.pwloc){
-            return window.pwloc+"PWmeter/apk/meterCallBB.jsp";
+            return window.pwloc+"PWmeter/meterCallBB.jsp";
         }else{
-            return "../apk/meterCallBB.jsp";
+            return "../meterCallBB.jsp";
         }
     }
 });
