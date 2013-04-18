@@ -1,7 +1,7 @@
 window.ether = 1;
 (function() {
 
-$.ajaxSetup({timeout:4000});
+$.ajaxSetup({timeout:5000});
 
 if( localStorage.getItem('loggedIn') != 'false' ){
     window.ether = localStorage.getItem('loggedIn');
@@ -85,7 +85,7 @@ App.Models.LoginStatus = Backbone.Model.extend({
         
         if( this.get('username') != '' && this.get('username') != null ){ 
             if( window.ether > 0 ){ 
-                v.getColl( self.get('username'), self.get('pass') );
+                campusVar.getColl( self.get('username'), self.get('pass') );
             }
        }
     },
@@ -157,7 +157,7 @@ App.Models.LoginStatus = Backbone.Model.extend({
         if( this.get('valid') == "Success" ){
             localStorage.setItem('loggedIn', 'true')
             this.set({'loggedIn': 'true' });
-            v.getColl( this.get('username'), this.get('pass') );
+            campusVar.getColl( this.get('username'), this.get('pass') );
 			appi.app.render();
             
         }else{
@@ -202,7 +202,7 @@ App.Views.AppView = Backbone.View.extend({
         'click .sett': 'sett',
         'click .goOffline': 'offline',
         'click select':'propigate',
-        'submit .meterInput': 'woops',
+        'submit .meterInput': 'formSubmit',
 		'click #sendM': 'sendM',
         'click #updateM': 'updateM',
         'click .sync': 'syncUp',
@@ -237,7 +237,7 @@ App.Views.AppView = Backbone.View.extend({
         $("#subM").css('background','#015486');
     },
 	
-	woops: function(e) {
+	formSubmit: function(e) {
         e.preventDefault();
     },
 	
@@ -289,13 +289,14 @@ App.Views.AppView = Backbone.View.extend({
             var vari = new Array(); 
             var errvars = "";
             var county = -1;
+			var failCount = appi.app.failRead.collection.length - 1;
             for( var i = 0; i < arr.length; i++ ){
                 //this.fetch();
                 if(window.pwloc){
-                    newLoadUrl = window.pwloc+"PWmeter/sendReadBB.jsp?"+arr[i]+"&nm="+appi.app.model.attributes.username+"&ps="+appi.app.model.attributes.pass;
+                    newLoadUrl = window.pwloc+"PWmeter/syncReadBB.jsp?"+arr[i]+"&nm="+appi.app.model.attributes.username+"&ps="+appi.app.model.attributes.pass;
                 }
                 else{
-                    newLoadUrl = "../sendReadBB.jsp?"+arr[i]+"&nm="+appi.app.model.attributes.username+"&ps="+appi.app.model.attributes.pass;
+                    newLoadUrl = "../syncReadBB.jsp?"+arr[i]+"&nm="+appi.app.model.attributes.username+"&ps="+appi.app.model.attributes.pass;
                 }
                 var ii = i;
                 var ss = arr.length;
@@ -316,6 +317,24 @@ App.Views.AppView = Backbone.View.extend({
                             str1 = str1+"<li>Meter: "+temp1[j].substr(temp1[j].indexOf("mNum=",0)+5)+"  |  Reading:"+
                                 temp1[j].substr( temp1[j].indexOf("read=",0)+5, temp1[j].indexOf("&readT=")-5);
                                 +"</li>";
+								
+							if( j == temp1.length - 1 ){
+                                var failVar = new App.Models.failRead([
+                                    {
+                                        campus: '',
+                                        util: '',
+                                        name: '',
+                                        val: '',
+                                        type: '',
+                                        date: '',
+                                        seqN: ''
+                                    }
+                                ]); 
+                                if( failCount > 0){appi.app.failRead.collection.add(failVar);}
+                                appi.app.failRead.collection.models[failCount].attributes.name = temp1[j].substr(temp1[j].indexOf("mNum=",0)+5);
+                                appi.app.failRead.collection.models[failCount].attributes.val = temp1[j].substr( temp1[j].indexOf("read=",0)+5, temp1[j].indexOf("&readT=")-5);
+                                failCount++; 
+                            }
                         }
                         $('body .syncstat .errlist').html('<ul>'+str1+'</ul>');
                 
@@ -328,6 +347,16 @@ App.Views.AppView = Backbone.View.extend({
             appi.app.offstorage = "";
         
         }else{
+			
+			if( appi.app.failRead.collection.length > 0 ){
+                var failStr = "<li class='red'>Prev Failed Readings:</li>"
+                for( var iii = 0; iii < appi.app.failRead.collection.length; iii++ ){
+                    
+                    failStr = failStr + "<li>Meter: " + appi.app.failRead.collection.models[iii].attributes.name +" | Reading:" + appi.app.failRead.collection.models[iii].attributes.val + "</li>";
+                    
+                }
+            }
+		
             $('body .syncstat').html("<span class='closestat'>Close Status Page</span>");
         }
     },
@@ -782,7 +811,7 @@ App.Collections.campusColl = Backbone.Collection.extend({
         //this.fetch({ data: $.param({ nm: user, ps: pass }) });
         var self = this;
         this.fetch({ data: $.param({ nm: user, ps: pass }), success: function() {
-                u.getColl( user, pass, 'EXE' );
+                utilsVar.getColl( user, pass, 'EXE' );
                 
                 var campusStorage = JSON.stringify(self.toJSON());
                 localStorage.setItem( 'campusStorage', campusStorage );
@@ -817,7 +846,6 @@ App.Views.campusColl = Backbone.View.extend({
         // Once the collection is fetched re-render the view
         //this.collection.bind("reset", this.render);
         //this.collection.on('add', this.addOne, this);
-        
     },
     
     render: function(){
@@ -839,7 +867,7 @@ App.Views.campusColl = Backbone.View.extend({
     }
     
 });
-var v = new App.Collections.campusColl([
+var campusVar = new App.Collections.campusColl([
     { name: '', desc: ''}
 ]);
 //END NEW
@@ -878,7 +906,7 @@ App.Collections.utilsColl = Backbone.Collection.extend({
         //this.fetch({ data: $.param({ nm: user, ps: pass }) });
         var self = this;
         this.fetch({ data: $.param({ nm: user, ps: pass }), success: function() {
-                w.getColl( user, pass, 'EXE' );
+                metersVar.getColl( user, pass, 'EXE' );
                 var utilsStorage = JSON.stringify(self.toJSON());
                 localStorage.setItem( 'utilsStorage', utilsStorage );
         }});
@@ -924,7 +952,7 @@ App.Views.utilsColl = Backbone.View.extend({
     }
     
 });
-var u = new App.Collections.utilsColl([
+var utilsVar = new App.Collections.utilsColl([
     { name: '', desc: ''}
 ]);
 // End Utils
@@ -1068,7 +1096,7 @@ App.Collections.metersColl = Backbone.Collection.extend({
         //this.fetch({ data: $.param({ nm: user, ps: pass, camp: camp }) });
         var self = this;
         this.fetch({ data: $.param({ nm: user, ps: pass, camp: camp }), success: function() {
-                t.getColl( user, pass );
+                prevVar.getColl( user, pass );
 				var metersStorage = JSON.stringify(self.toJSON());
                 localStorage.setItem( 'metersStorage', metersStorage );
                 appi.app.renderView();
@@ -1136,7 +1164,7 @@ App.Views.metersColl = Backbone.View.extend({
     }
     
 });
-var w = new App.Collections.metersColl([
+var metersVar = new App.Collections.metersColl([
     { 
         name: '', 
         desc: '',
@@ -1260,7 +1288,7 @@ App.Collections.prevReadColl = Backbone.Collection.extend({
     }
     
 });
-var t = new App.Collections.prevReadColl([
+var prevVar = new App.Collections.prevReadColl([
     {
         campus: '',
         util: '',
@@ -1275,22 +1303,85 @@ var t = new App.Collections.prevReadColl([
 ]);
 // End Prev Readings
 
+//Start store failed readings
+App.Views.failRead = Backbone.View.extend({
+    
+    initialize: function () {  
+
+    },
+    
+    render: function(){        
+        return this;
+    }
+});
+App.Models.failRead = Backbone.Model.extend({
+
+    defaults: {
+        campus: '',
+        util: '',
+        name: '',
+        val: '',
+        type: '',
+        date: '',
+        seqN: ''
+    }
+    
+});
+App.Views.failReadColl = Backbone.View.extend({
+  
+    initialize: function () {
+      
+    },
+    
+    render: function(){
+        this.$el.empty();
+        
+        this.collection.each( function(meter){
+            _FailView = new App.Views.meters({model: meter });
+            this.$el.append( _FailView.render().el );
+        }, this);
+       
+        return this;
+    }
+    
+});
+App.Collections.failReadColl = Backbone.Collection.extend({
+    model: App.Models.failRead,
+    
+    initialize: function () {  
+        
+    }
+    
+});
+var failVar = new App.Collections.failReadColl([
+    {
+        campus: '',
+        util: '',
+        name: '',
+        val: '',
+        type: '',
+        date: '',
+        seqN: ''
+    }
+]);
+
+//Start router
 App.Router = Backbone.Router.extend({
     
     initialize: function () {
  
         this.app = new App.Views.AppView({model: new App.Models.LoginStatus() });
         
-        var campusV = v;
+        var campusV = campusVar;
         this.app.campus = new App.Views.campusColl({ collection: campusV });
-        var utilsV = u;
+        var utilsV = utilsVar;
         this.app.utils = new App.Views.utilsColl({ collection: utilsV });
-        var metersV = w;
+        var metersV = metersVar;
         var id = '';
         this.app.meters = new App.Views.metersColl({ collection: metersV, constraint: id });
         this.app.meter = new App.Views.meter({ model: new App.Models.meter({name: id}) }); 
 
-		var prevReadV = t;
+		var prevReadV = prevVar;
         this.app.prevRead = new App.Views.prevReadColl({ collection: prevReadV }); 
 		
         $('body').html(this.app.el);

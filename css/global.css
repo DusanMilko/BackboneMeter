@@ -163,13 +163,13 @@ margin: 0px; padding: 10px 2%;
 }
 
 .loader, .loaderLogin { width: 100%; text-align: center; float: left; margin: 30px 0px 10px;}
-.changeutil, .changecamps, .sett, .goOffline, .sync { cursor: pointer; width: 60px; height: 30px; float: right; position: absolute; top: 20px; background: #cbcbcb;
+.changeutil, .changecamps, .sett, .goOffline, .sync, .reload { cursor: pointer; width: 60px; height: 30px; float: right; position: absolute; top: 20px; background: #cbcbcb;
 text-align: center; text-decoration: none; padding-top: 15px; margin-left: -60px; color: #7f354a;}
 .changeutil:active, .changecamps:active, .sett:active , .sync:active { color: #015486; background: #bbb; }
 
 #settings_cont { width: 100%; height: 85px; background: #222; border-bottom: 1px solid #000; }
 #settings { width: 100%; margin: 0px auto;}
-#settings .logout, #settings .changeutil, #settings .changecamps, #settings .goOffline, .sync { position: static; top: 0px; margin: 20px 10px 0px 0px; }
+#settings .logout, #settings .changeutil, #settings .changecamps, #settings .goOffline, .sync, .reload { position: static; top: 0px; margin: 20px 10px 0px 0px; }
 
 #internetError { width: 100%; color: #222; background: #FFFF99; text-align: center; padding: 10px 0px;}
 .sortM { float: left; background: #777; width: 90%; padding: 7px 5%;
