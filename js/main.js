@@ -357,7 +357,7 @@ App.Views.AppView = Backbone.View.extend({
                 }
             }
 		
-            $('body .syncstat').html("<span class='closestat'>Close Status Page</span>");
+            $('body .syncstat').html("<span class='closestat'>Close Status Page</span><span class='errlist'><ul>"+failStr+"</ul></span>");
         }
     },
     
