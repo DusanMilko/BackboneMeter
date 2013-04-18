@@ -1384,6 +1384,9 @@ App.Router = Backbone.Router.extend({
 		var prevReadV = prevVar;
         this.app.prevRead = new App.Views.prevReadColl({ collection: prevReadV }); 
 		
+		var failReadvar = failVar;
+        this.app.failRead = new App.Views.failReadColl({ collection: failReadvar }); 
+		
         $('body').html(this.app.el);
         
         //this.app.render();
